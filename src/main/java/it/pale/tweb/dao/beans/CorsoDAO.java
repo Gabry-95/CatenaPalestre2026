@@ -1,0 +1,247 @@
+package it.pale.tweb.dao.beans;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.sql.Connection;
+import it.pale.tweb.dao.utils.DBManager;
+
+public class CorsoDAO {
+	private static Connection conn = null;
+
+	public Corso get(Corso corso) {
+		String query = "SELECT * FROM Corso WHERE id=?";
+
+		Corso res = null;
+		PreparedStatement ps;
+		conn = DBManager.startConnection();
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, corso.getId());
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				res = recordToCorso(rs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		DBManager.closeConnection();
+		return res;
+	}
+
+	private Corso recordToCorso(ResultSet rs) throws SQLException {
+		Corso corso = new Corso();
+		corso.setId(rs.getInt("id"));
+		corso.setNome(rs.getString("nome"));
+		corso.setCosto(rs.getInt("costo"));
+		corso.setTipo(rs.getString("tipo"));
+		corso.setPalestra(rs.getInt("palestra"));
+
+		return corso;
+	}
+
+	public Vector<Corso> getAll() {
+		String query = "SELECT * FROM Corso order by id";
+
+		Vector<Corso> res = new Vector<Corso>();
+		PreparedStatement ps;
+		conn = DBManager.startConnection();
+		try {
+			ps = conn.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Corso corso = recordToCorso(rs);
+				res.add(corso);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		DBManager.closeConnection();
+		return res;
+	}
+
+	public boolean salva(Corso corso) {
+		String query = "INSERT INTO Corso VALUES ( ?, ?, ?, ?, ?)";
+		boolean esito = false;
+
+		PreparedStatement ps;
+		conn = DBManager.startConnection();
+		try {
+			ps = conn.prepareStatement(query);
+
+			ps.setInt(1, corso.getId());
+			ps.setString(2, corso.getNome());
+			ps.setInt(3, corso.getCosto());
+			ps.setString(4, corso.getTipo());
+			ps.setInt(5, corso.getPalestra());
+
+			int tmp = ps.executeUpdate();
+			if (tmp == 1)
+				esito = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		DBManager.closeConnection();
+		return esito;
+	}
+
+	public boolean elimina(Corso corso) {
+		String query = "DELETE FROM Corso WHERE id = ?";
+		boolean esito = false;
+
+		PreparedStatement ps;
+		conn = DBManager.startConnection();
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, corso.getId());
+
+			int tmp = ps.executeUpdate();
+			if (tmp == 1)
+				esito = true;
+
+		} catch (SQLException e) {
+			esito = false;
+			e.printStackTrace();
+		}
+		DBManager.closeConnection();
+		return esito;
+	}
+
+	public boolean modifica(Corso corso) {
+		String query = "UPDATE Corso SET nome=?, costo=?, tipo=?, palestra=? WHERE id=?";
+		boolean esito = false;
+
+		PreparedStatement ps;
+		conn = DBManager.startConnection();
+		try {
+			ps = conn.prepareStatement(query);
+
+
+			ps.setString(1, corso.getNome());
+			ps.setInt(2, corso.getCosto());
+			ps.setString(3, corso.getTipo());
+			ps.setInt(4, corso.getPalestra());
+			ps.setInt(5, corso.getId());
+
+
+			int tmp = ps.executeUpdate();
+			if (tmp == 1)
+				esito = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		DBManager.closeConnection();
+		return esito;
+	}
+
+	// 68. Data una palestra, restituire l’elenco dei corsi 
+	public Vector<Corso> getCorso(Palestra palestra) {
+		String query = "SELECT * FROM Corso WHERE Palestra=? order by id";
+
+		Vector<Corso> res = new Vector<Corso>();
+		PreparedStatement ps;
+		conn = DBManager.startConnection();
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, palestra.getId());
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Corso corso = recordToCorso(rs);
+				res.add(corso);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		DBManager.closeConnection();
+		return res;
+	}
+
+	//59 Dato un corso restituire il numero di iscritti
+	public int numIscritti(Corso c) {
+
+		String query="SELECT count(DISTINCT Cliente) as 'iscritti' FROM frequenta "
+				+ "JOIN corso on frequenta.Corso=corso.ID "
+				+ "JOIN abbonamento ON abbonamento.Fattura= frequenta.Abbonamento "
+				+ "WHERE corso.id=? ";
+
+		int res=0;
+		PreparedStatement ps;
+		conn = DBManager.startConnection();
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, c.getId());
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				res= rs.getInt("iscritti");
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		DBManager.closeConnection();
+		return res;
+	}
+
+	public int costoCorsiAbbonamento(Vector<Corso> lista) {
+		//metto tanti punti interrogativi quanti sono gli elementi della lista
+		int totale=0;
+		String id= new String();
+		
+		for(int i=0; i<lista.size(); i++) {
+			id+="?";
+			if(i<lista.size()-1) {
+				id+=", ";
+			}
+		}
+		
+		String query="SELECT SUM(corso.costo) - MIN(corso.costo) as \"totale\" FROM corso "
+				+ "WHERE corso.id IN ("+id+")";
+		PreparedStatement ps;
+		conn = DBManager.startConnection();
+		
+		try {
+			ps = conn.prepareStatement(query);
+			//Associamo ad ogi punto interrogativo il relativo id
+
+			for(int i=0; i<lista.size(); i++) {
+				ps.setInt(i+1, lista.get(i).getId());
+
+			}
+			
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				totale= rs.getInt("totale");
+			}
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		DBManager.closeConnection();
+		return totale;
+
+	}
+	
+	//Dato un abbonamento restituisci la lista dei corsi seguiti
+	public Vector<Corso> getCorsiSeguiti(Abbonamento a) {
+		String query = "SELECT c.ID AS \"id\", c.Nome AS \"nome\", c.Costo AS \"costo\", c.Tipo AS \"tipo\", c.Palestra AS \"palestra\" FROM corso AS c "
+				+ "JOIN frequenta ON frequenta.Corso = c.ID "
+				+ "WHERE frequenta.Abbonamento=?;";
+
+		Vector<Corso> res = new Vector<Corso>();
+		PreparedStatement ps;
+		conn = DBManager.startConnection();
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, a.getFattura());
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Corso corso = recordToCorso(rs);
+				res.add(corso);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		DBManager.closeConnection();
+		return res;
+	}
+}
