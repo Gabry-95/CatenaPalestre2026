@@ -186,7 +186,7 @@
 
 
 	<!-- Footer-->
-	<%@ include file="/WEB-INF/Footer.jsp"%>
+	<%@ include file="/WEB-INF/footer.jsp"%>
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

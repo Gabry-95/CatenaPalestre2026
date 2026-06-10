@@ -77,6 +77,7 @@ public class AggiungiAbbonamento extends HttpServlet {
 				request.getRequestDispatcher("/privato/abbonamento/DettagliAbbonamento").forward(request, response);
 			}
 			else {
+				//fare pagina errore e testare
 				response.sendRedirect("/WEB-INF/errore.jsp");
 			}
 		}catch(Exception e) {
