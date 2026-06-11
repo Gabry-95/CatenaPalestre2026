@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 <%@page import="it.pale.tweb.dao.beans.Corso"%>
-<%@page import="it.pale.tweb.dao.beans.CorsoDAO"%>
 <%@page import="java.util.Vector"%>
 
 <!DOCTYPE html>

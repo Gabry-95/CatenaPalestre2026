@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@page import="it.pale.tweb.dao.beans.Corso"%>
+<%@page import="java.util.Vector"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +12,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>Aggiungi Cliente</title>
+<title>Aggiungi Dipendente</title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/logo.ico" />
 <!-- Font Awesome icons (free version)-->
@@ -24,33 +28,62 @@
 	rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" />
+<script src="/js/checkbox.js"></script>
 </head>
 <body id="page-top">
-
+	
+	<%
+	Vector<Corso> corsi = (Vector<Corso>) request.getAttribute("corsi");
+	%>
+	
 	<!-- Navigation-->
 	<%@ include file="/WEB-INF/privato/navbarPrivato.jsp"%>
 
 	<div class="container py-5">
 		<div class="container px-4 px-lg-5 text-center">
-			<h1 class="mb-1">Crea Un Nuovo Cliente</h1>
+			<h1 class="mb-1">Crea Un Nuovo Dipendente</h1>
 		</div>
-		<form class="row g-3" action="/privato/cliente/AggiungiCliente"
+		<form class="row g-3" action="/privato/dipendenti/AggiungiDipendente"
 			method="get">
 			<div class="col-md-6">
-				<label for="nome" class="form-label" required>Nome
-					</label> <input type="text" class="form-control" name="nome" required>
+				<label for="nome" class="form-label" required>Nome </label> <input
+					type="text" class="form-control" name="nome" required>
 			</div>
 			<div class="col-md-6">
-				<label for="cognome" class="form-label" required>Cognome
-					</label> <input type="text" class="form-control" name="cognome" required>
+				<label for="cognome" class="form-label" required>Cognome </label> <input
+					type="text" class="form-control" name="cognome" required>
 			</div>
 			<div class="col-md-6">
-				<label for="telefono" class="form-label" required>Numero Di Telefono
-					</label> <input type="tel" class="form-control" name="telefono" required>
+				<label for="telefono" class="form-label" required>Numero Di
+					Telefono </label> <input type="tel" class="form-control" name="telefono"
+					required>
 			</div>
+			<div class="col-md-4">
+				<label for="tipo" class="form-label">Seleziona Qualifica</label> <select
+					name="tipo" class="form-select" id="tipo">
+					<option selected value="1">Istruttore di Sala</option>
+					<option value="2">Istruttore Corso</option>
+					<option value="3">Personal Trainer</option>
+					<option value="4">Personale Amministrativo</option>
+				</select>
+			</div>
+			<h3 class="mb-1">Seleziona Corsi Insegnati</h3>
+			<%
+			for (Corso c : corsi) {
+			%>
+			<div class="form-check">
+				<input class="form-check-input corso-checkbox" type="checkbox"
+					name="corsi" value="<%=c.getId()%>"> <label
+					class="form-check-label"> <%=c.getNome()%>
+				</label>
+			</div>
+			<%
+			}
+			%>
+			
 			<div class="col-12">
-			<button type="submit" class="btn btn-primary">Aggiungi
-				Cliente</button>
+				<button type="submit" class="btn btn-primary">Aggiungi
+					Dipendente</button>
 			</div>
 		</form>
 	</div>

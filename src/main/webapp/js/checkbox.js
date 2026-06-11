@@ -9,8 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function aggiornaCheckbox() {
         const isStandard = selectTipo.value === "Standard";
+		const isIstruttoreCorso = selectTipo.value === "2";
         checkboxes.forEach(cb => {
-            if (isStandard) {
+            if (isStandard || !isIstruttoreCorso) {
                 cb.checked = false;
                 cb.disabled = true;
             } else {
