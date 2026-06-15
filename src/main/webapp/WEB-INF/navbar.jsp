@@ -27,7 +27,7 @@
 					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="/Index#about">ABOUT</a></li>
 					<li class="nav-item"><a class="nav-link" aria-current="page"
-						href="/Index#portfolio">servizi</a></li>
+						href="/Index#servizi">servizi</a></li>
 					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="#footer">note legali &amp; social</a></li>
 				</ul>

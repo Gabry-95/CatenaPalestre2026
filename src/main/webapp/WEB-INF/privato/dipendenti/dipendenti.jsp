@@ -20,7 +20,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>Aurora Fitness</title>
+<title>Lista Dipendenti</title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/logo.ico" />
 <!-- Font Awesome icons (free version)-->
@@ -35,7 +35,7 @@
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
 	rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)-->
-<link href="${pageContext.request.contextPath}/css/styles.css"
+<link href="/css/styles.css"
 	rel="stylesheet" />
 </head>
 <body id="page-top">
@@ -43,7 +43,7 @@
 	<%
 	Vector<Istruttore_sala> is= (Vector<Istruttore_sala>)request.getAttribute("is");
 	Vector<Istruttore_corso> ic=(Vector<Istruttore_corso>)request.getAttribute("ic");
-	Vector<Personal_trainer> pt = (Vector<Personal_trainer>)request.getAttribute("pt");
+	Vector<Personal_trainer> pts = (Vector<Personal_trainer>)request.getAttribute("pt");
 	Vector<Personale_amministrativo> pa=(Vector<Personale_amministrativo>) request.getAttribute("pa");
 	%>
 
@@ -55,6 +55,7 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
+					<th scope="col">#</th>
 					<th scope="col">Matricola</th>
 					<th scope="col">Nome</th>
 					<th scope="col">Cognome</th>
@@ -69,7 +70,7 @@
 					k++;
 				%>
 				<tr>
-					<%-- <td><%=k%></td> --%>
+					<td><%=k%></td>
 					<td><%=s.getMatricola()%></td>
 					<td><%=s.getNome()%></td>
 					<td><%=s.getCognome()%></td>
@@ -89,6 +90,7 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
+				<th scope="col">#</th>
 					<th scope="col">Matricola</th>
 					<th scope="col">Nome</th>
 					<th scope="col">Cognome</th>
@@ -103,7 +105,7 @@
 					k++;
 				%>
 				<tr>
-					<%-- <td><%=k%></td> --%>
+					<td><%=k%></td>
 					<td><%=i.getMatricola()%></td>
 					<td><%=i.getNome()%></td>
 					<td><%=i.getCognome()%></td>
@@ -122,6 +124,7 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
+				<th scope="col">#</th>
 					<th scope="col">Matricola</th>
 					<th scope="col">Nome</th>
 					<th scope="col">Cognome</th>
@@ -132,16 +135,22 @@
 			<tbody>
 				<%
 				k=0;
-				for (Personal_trainer t: pt) {
+				for (Personal_trainer t: pts) {
 					k++;
 				%>
 				<tr>
-					<%-- <td><%=k%></td> --%>
+					<td><%=k%></td>
 					<td><%=t.getMatricola()%></td>
 					<td><%=t.getNome()%></td>
 					<td><%=t.getCognome()%></td>
 					<td><%=t.getPalestra()%></td>
 					<td><%=t.getTelefono()%></td>
+					<td>
+						<form class="col-12" action="/privato/cliente/ClientiPT" method="get">
+								<input type="hidden" name="pt" value="<%=t.getMatricola()%>">
+								<button type="submit" class="btn btn-primary btn">Visualizza Utenti Seguiti</button>
+						</form>
+					</td>
 				</tr>
 				<%
 				}
@@ -155,6 +164,7 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
+				<th scope="col">#</th>
 					<th scope="col">Matricola</th>
 					<th scope="col">Nome</th>
 					<th scope="col">Cognome</th>
@@ -169,7 +179,7 @@
 					k++;
 				%>
 				<tr>
-					<%-- <td><%=k%></td> --%>
+					<td><%=k%></td>
 					<td><%=a.getMatricola()%></td>
 					<td><%=a.getNome()%></td>
 					<td><%=a.getCognome()%></td>
@@ -186,7 +196,7 @@
 
 
 	<!-- Footer-->
-	<%@ include file="/WEB-INF/Footer.jsp"%>
+	<%@ include file="/WEB-INF/footer.jsp"%>
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

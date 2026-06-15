@@ -47,6 +47,16 @@
 		<h1 class="mb-1">Dettagli Abbonamento</h1>
 	</div>
 	
+	<%
+	if (request.getParameter("errore") != null) {
+	%>
+		
+		<%@ include file="/WEB-INF/errore.jsp"%>
+
+	<%
+	}
+	%>
+
 	<div class="container py-5">
 		<form class="row g-3"
 			action="/privato/abbonamento/DettagliAbbonamento" method="get">
@@ -156,7 +166,7 @@
 	<br> <br> <br> <br>
 	
 	<!-- Footer-->
-	<%@ include file="/WEB-INF/Footer.jsp"%>
+	<%@ include file="/WEB-INF/footer.jsp"%>
 
 	<!-- Bootstrap core JS-->
 	<script

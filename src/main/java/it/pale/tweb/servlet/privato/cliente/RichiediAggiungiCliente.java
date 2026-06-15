@@ -28,8 +28,6 @@ public class RichiediAggiungiCliente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//QUI NON HO NECESSITA' DI SAPERE A QUALE PALESTRA APPARTIENE 
-		
 		request.getRequestDispatcher("/WEB-INF/privato/cliente/aggiungiCliente.jsp").forward(request, response);
 	
 	}

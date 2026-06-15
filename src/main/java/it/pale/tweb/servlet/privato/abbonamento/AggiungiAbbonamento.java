@@ -13,6 +13,8 @@ import it.pale.tweb.dao.beans.AbbonamentoDAO;
 import it.pale.tweb.dao.beans.join.FrequentaDAO;
 import it.pale.tweb.dao.beans.Corso;
 import it.pale.tweb.dao.beans.CorsoDAO;
+import it.pale.tweb.dao.beans.Personal_trainer;
+import it.pale.tweb.dao.beans.join.SegueDAO;
 
 /**
  * Servlet implementation class AggiungiAbbonamento
@@ -36,6 +38,7 @@ public class AggiungiAbbonamento extends HttpServlet {
 		
 		try {
 			int matricola=Integer.parseInt(request.getParameter("matricola"));
+			Integer matricolaPT=Integer.parseInt(request.getParameter("matricolaPT"));
 			int fattura=Integer.parseInt(request.getParameter("fattura"));
 			String tipo=request.getParameter("tipo");
 			String[] checkbox = request.getParameterValues("corsi");
@@ -43,6 +46,7 @@ public class AggiungiAbbonamento extends HttpServlet {
 			int costiAggiuntivi=0;
 			boolean esitoF=true;
 			boolean esitoA=false;
+			boolean esitoS=true;
 			
 			AbbonamentoDAO aDAO= new AbbonamentoDAO();
 			
@@ -65,6 +69,13 @@ public class AggiungiAbbonamento extends HttpServlet {
 						break;
 					}
 				}
+				if(matricolaPT!=null) {
+					esitoS=false;
+					SegueDAO sDAO=new SegueDAO();
+					Personal_trainer pt=new Personal_trainer();
+					pt.setMatricola(matricolaPT);
+					esitoS=sDAO.salva(a, pt);
+				}
 			}
 			else {
 				Abbonamento a= new Abbonamento(fattura, tipo, matricola, costiAggiuntivi);
@@ -72,15 +83,15 @@ public class AggiungiAbbonamento extends HttpServlet {
 				esitoA=aDAO.salva(a);
 			}
 			
-			if(esitoA && esitoF) {
+			if(esitoA && esitoF && esitoS) {
 				request.setAttribute("matricola", matricola);
 				request.getRequestDispatcher("/privato/abbonamento/DettagliAbbonamento").forward(request, response);
 			}
 			else {
-				response.sendRedirect("/WEB-INF/errore.jsp");
+				response.sendRedirect("/privato/abbonamento/RichiediAggiungiAbbonamento?errore");
 			}
 		}catch(Exception e) {
-			response.sendRedirect("/WEB-INF/errore.jsp");
+			response.sendRedirect("/privato/abbonamento/RichiediAggiungiAbbonamento?errore");
 		}
 	}
 }

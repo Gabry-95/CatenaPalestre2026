@@ -65,7 +65,7 @@ public class Istruttore_corsoDAO {
 	}
 
 	public boolean salva(Istruttore_corso istruttoreC) {
-		String query = "INSERT INTO Istruttore_corso VALUES ( ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO Istruttore_corso (nome, cognome, palestra, telefono) VALUES ( ?, ?, ?, ?)";
 		boolean esito = false;
 
 		PreparedStatement ps;
@@ -73,11 +73,10 @@ public class Istruttore_corsoDAO {
 		try {
 			ps = conn.prepareStatement(query);
 
-			ps.setInt(1, istruttoreC.getMatricola());
-			ps.setString(2, istruttoreC.getNome());
-			ps.setString(3, istruttoreC.getCognome());
-			ps.setInt(4, istruttoreC.getPalestra());
-			ps.setLong(5, istruttoreC.getTelefono());
+			ps.setString(1, istruttoreC.getNome());
+			ps.setString(2, istruttoreC.getCognome());
+			ps.setInt(3, istruttoreC.getPalestra());
+			ps.setLong(4, istruttoreC.getTelefono());
 
 
 			int tmp = ps.executeUpdate();
@@ -154,6 +153,26 @@ public class Istruttore_corsoDAO {
 			while (rs.next()) {
 				Istruttore_corso i = recordToIstruttoreC(rs);
 				res.add(i);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		DBManager.closeConnection();
+		return res;
+	}
+	
+	public Istruttore_corso getFromTelefono(Istruttore_corso istruttoreC) {
+		String query = "SELECT * FROM Istruttore_corso WHERE telefono=?";
+
+		Istruttore_corso res = null;
+		PreparedStatement ps;
+		conn = DBManager.startConnection();
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setLong(1, istruttoreC.getTelefono());
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				res = recordToIstruttoreC(rs);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

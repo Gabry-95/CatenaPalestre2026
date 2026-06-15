@@ -159,30 +159,4 @@ public class Personal_trainerDAO {
 		DBManager.closeConnection();
 		return res;
 	}
-	
-	//69. Data una palestra restituire tutti i numeri di telefono dei dipendenti con nome e cognome 
-//	public Vector<Personal_trainer> getTelefonoPT(Palestra p) {
-//		
-//		//VA LASCIATA? posso ricavarla dalla query precedente
-//		
-//		String query = "SELECT telefono, nome, cognome FROM Personal_Trainer WHERE palestra=?";
-//
-//
-//		Vector<Personal_trainer> res = new Vector<Personal_trainer>();
-//		PreparedStatement ps;
-//		conn = DBManager.startConnection();
-//		try {
-//			ps = conn.prepareStatement(query);
-//			ResultSet rs = ps.executeQuery();
-//			ps.setInt(1, p.getId());
-//			while (rs.next()) {
-//				Personal_trainer pt= recordToPersonalT(rs);
-//				res.add(pt);
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		DBManager.closeConnection();
-//		return res;
-//	}
 }

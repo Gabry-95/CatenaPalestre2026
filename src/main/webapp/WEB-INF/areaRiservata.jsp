@@ -80,7 +80,7 @@
 
 
 	<!-- Footer-->
-	<%@ include file="/WEB-INF/Footer.jsp"%>
+	<%@ include file="/WEB-INF/footer.jsp"%>
 
 
 

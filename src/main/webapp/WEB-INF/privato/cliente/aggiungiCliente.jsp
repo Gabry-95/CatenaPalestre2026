@@ -50,14 +50,14 @@
 			</div>
 			<div class="col-12">
 			<button type="submit" class="btn btn-primary">Aggiungi
-					Abbonamento</button>
+				Cliente</button>
 			</div>
 		</form>
 	</div>
 	
 	<br> <br> <br> <br>
 	<!-- Footer-->
-	<%@ include file="/WEB-INF/Footer.jsp"%>
+	<%@ include file="/WEB-INF/footer.jsp"%>
 
 	<!-- Bootstrap core JS-->
 	<script
