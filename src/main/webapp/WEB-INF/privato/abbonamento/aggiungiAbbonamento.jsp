@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@page import="it.pale.tweb.dao.beans.Corso"%>
+<%@page import="it.pale.tweb.dao.beans.Personal_trainer"%>
 <%@page import="java.util.Vector"%>
 
 <!DOCTYPE html>
@@ -35,11 +36,22 @@
 
 	<%
 	Vector<Corso> corsi = (Vector<Corso>) request.getAttribute("corsi");
+	Vector<Personal_trainer> pts = (Vector<Personal_trainer>) request.getAttribute("pts");
 	%>
 
 	<!-- Navigation-->
 	<%@ include file="/WEB-INF/privato/navbarPrivato.jsp"%>
+	
+	<%
+	if (request.getParameter("errore") != null) {
+	%>
+		
+		<%@ include file="/WEB-INF/errore.jsp"%>
 
+	<%
+	}
+	%>
+	
 	<div class="container py-5">
 		<div class="container px-4 px-lg-5 text-center">
 			<h1 class="mb-1">Crea Un Nuovo Abbonamento</h1>
@@ -64,6 +76,20 @@
 					<option value="Gold">Gold</option>
 				</select>
 			</div>
+			
+			<div class="col-md-6" id="pt-container">
+				<label class="form-label">Personal Trainer</label> 
+				<select name="matricolaPT" class="form-select" id="pt-select">
+					<%
+					for(Personal_trainer pt: pts){
+					%>
+					<option value="<%=pt.getMatricola()%>"><%=pt.getNome() %> <%=pt.getCognome() %></option>
+					<%
+					}
+					%>
+				</select>
+			</div>
+			
 			<h3 class="mb-1">Seleziona Corsi</h3>
 			<%
 			for (Corso c : corsi) {
@@ -77,6 +103,7 @@
 			<%
 			}
 			%>
+			
 			<div class="col-12">
 				<button type="submit" class="btn btn-primary">Aggiungi
 					Abbonamento</button>

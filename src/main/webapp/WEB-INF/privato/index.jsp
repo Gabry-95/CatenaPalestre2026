@@ -105,10 +105,10 @@
 					</a>
 				</div>
 				<div class="col-lg-6">
-					<a class="portfolio-item" href="/privato/corsi/RichiediCorsi">
+					<a class="portfolio-item" href="/privato/corsi/ClientiPT">
 						<div class="caption">
 							<div class="caption-content">
-								<div class="h1">Visualizza Utenti Seguiti da Personal Trainer</div>
+								<div class="h1">Visualizza Iscritti ai Corsi</div>
 							</div>
 						</div> <img class="img-fluid" src="assets/img/portfolio/port7.jpg" alt="..." />
 					</a>

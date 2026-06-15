@@ -13,6 +13,8 @@ import java.util.Vector;
 import it.pale.tweb.dao.beans.Corso;
 import it.pale.tweb.dao.beans.CorsoDAO;
 import it.pale.tweb.dao.beans.Palestra;
+import it.pale.tweb.dao.beans.Personal_trainer;
+import it.pale.tweb.dao.beans.Personal_trainerDAO;
 
 /**
  * Servlet implementation class RichiediAggiungiAbbonamento
@@ -39,9 +41,12 @@ public class RichiediAggiungiAbbonamento extends HttpServlet {
 		p.setId(id);
 				
 		CorsoDAO cDAO= new CorsoDAO();
-		Vector<Corso> corsi= cDAO.getCorso(p); 
+		Personal_trainerDAO ptDAO= new Personal_trainerDAO();
+		Vector<Corso> corsi= cDAO.getCorso(p);
+		Vector<Personal_trainer>pts=ptDAO.elencoPT(p);
 		
 		request.setAttribute("corsi", corsi);
+		request.setAttribute("pts", pts);
 		request.getRequestDispatcher("/WEB-INF/privato/abbonamento/aggiungiAbbonamento.jsp").forward(request, response);
 	}
 }

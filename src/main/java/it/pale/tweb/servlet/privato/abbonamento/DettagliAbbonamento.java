@@ -54,7 +54,7 @@ public class DettagliAbbonamento extends HttpServlet {
 					corsiSeguiti=cDAO.getCorsiSeguiti(a);
 				}
 			}catch(Exception e) {
-				response.sendRedirect("/WEB-INF/privato/abbonamento/errore.jsp");
+				response.sendRedirect("/privato/abbonamento/DettagliAbbonamento?errore");
 				return;
 			}
 			request.setAttribute("scadenza", scadenza);

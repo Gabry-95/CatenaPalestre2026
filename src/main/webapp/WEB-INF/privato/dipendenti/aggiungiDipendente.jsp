@@ -31,13 +31,23 @@
 <script src="/js/checkbox.js"></script>
 </head>
 <body id="page-top">
-	
+
 	<%
 	Vector<Corso> corsi = (Vector<Corso>) request.getAttribute("corsi");
 	%>
-	
+
 	<!-- Navigation-->
 	<%@ include file="/WEB-INF/privato/navbarPrivato.jsp"%>
+
+	<%
+	if (request.getParameter("errore") != null) {
+	%>
+		
+		<%@ include file="/WEB-INF/errore.jsp"%>
+
+	<%
+	}
+	%>
 
 	<div class="container py-5">
 		<div class="container px-4 px-lg-5 text-center">
@@ -80,15 +90,18 @@
 			<%
 			}
 			%>
-			
+
 			<div class="col-12">
 				<button type="submit" class="btn btn-primary">Aggiungi
 					Dipendente</button>
 			</div>
 		</form>
 	</div>
-	
-	<br> <br> <br> <br>
+
+	<br>
+	<br>
+	<br>
+	<br>
 	<!-- Footer-->
 	<%@ include file="/WEB-INF/footer.jsp"%>
 

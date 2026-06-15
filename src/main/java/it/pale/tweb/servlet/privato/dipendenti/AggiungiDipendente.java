@@ -70,7 +70,7 @@ public class AggiungiDipendente extends HttpServlet {
 				for(String s: checkbox) {
 					Corso c= new Corso();
 					c.setId(Integer.parseInt(s));
-					ic=icDAO.get(ic);
+					ic=icDAO.getFromTelefono(ic);
 					System.out.println(ic.getMatricola());
 					esitoI=iDAO.salva(c, ic);
 					if(esitoI==false) {
@@ -94,9 +94,11 @@ public class AggiungiDipendente extends HttpServlet {
 		}
 		if(esitoD && esitoI) {
 			request.getRequestDispatcher("/privato/dipendenti/Dipendenti").forward(request, response);
+			return;
 		}
 		else {
-			response.sendRedirect("/WEB-INF/errore.jsp");
+			response.sendRedirect("/privato/dipendenti/RichiediAggiungiDipendente?errore");
+			return;
 		}
 	}
 				
