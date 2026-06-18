@@ -68,7 +68,7 @@ Vector<Corso> corsi= (Vector<Corso>) request.getAttribute("corsi");
 			<table class="table table-secondary table-hover">
 				<thead>
 					<tr>
-						<th scope="col">Id</th>
+						<th scope="col">Idss</th>
 						<th scope="col">Nome</th>
 						<th scope="col">Costo</th>
 						<th scope="col">Tipo</th>
