@@ -41,7 +41,7 @@ Vector<Corso> corsi= (Vector<Corso>) request.getAttribute("corsi");
 	<header class="masthead bg-primary text-white text-center">
 		<div class="container d-flex align-items-center flex-column">
 			<!-- Masthead Avatar Image-->
-			<img class="masthead-avatar mb-5" src="/assets/logo.png"  />
+			<img class="masthead-avatar mb-5" src="/assets/logo.png" />
 			<!--adatta la dimensione del logo, e scrivi "logo" non log  -->
 			<!-- Masthead Heading-->
 			<h1 class="masthead-heading text-uppercase mb-0">Gestisci I
@@ -53,29 +53,26 @@ Vector<Corso> corsi= (Vector<Corso>) request.getAttribute("corsi");
 				<div class="divider-custom-line"></div>
 			</div>
 			<!-- Masthead Subheading-->
-			<p></p>
+			<p>
 		</div>
 
-			<div class="mb-3" style="text-align: left;">
-			<p class="masthead-subheading font-weight-light mb-0 ">
-			<form class="row g-3" action="/privato/corsi/Corsi" method="post"> 
-				<a href="aggiungi.html">
-					<button type="button" class="btn btn-secondary btn-lg">Aggiungi un corso</button>
-				</a>
+		<div class="mb-3" style="text-align: center;">
+			<form class="col-12" action="/privato/corsi/RichiediAggiungiCorsi" method="get">
+				<input type="hidden" name="id" value="">
+				<button type="submit" class="btn btn-secondary btn-lg">Aggiungi Corso</button>
+			</form>
+		</div>
 
-				</p>
-		</div> 
 
-		
 		<div class="container align-items-center">
 			<table class="table table-secondary table-hover">
 				<thead>
 					<tr>
-						<th scope="col">Id</th>
+						<th scope="col">Idss</th>
 						<th scope="col">Nome</th>
 						<th scope="col">Costo</th>
 						<th scope="col">Tipo</th>
-						<!-- <th scope="col"></th> -->
+						 <th scope="col"></th> 
 						<th scope="col"></th>
 					</tr>
 				</thead>
@@ -90,16 +87,21 @@ Vector<Corso> corsi= (Vector<Corso>) request.getAttribute("corsi");
 						<td><%= c.getNome() %></td>
 						<td><%= c.getCosto()%></td>
 						<td><%= c.getTipo()%></td>
-						
-				
-						<%-- <td><a
-							href="RichiediModifica?matricola=<%= c.getId()%>">
-								<button type="button" class="btn btn-secondary btn-lg">Modifica</button>
-						</a></td> --%>
-						<td><a
-							href="/privato/corsi/Corsi?id=<%= c.getId()%>">
-								<button type="button" class="btn btn-secondary btn-lg">Elimina</button>
-						</a></td>
+
+
+						<td>
+							<form class="col-12" action="/privato/corsi/RichiediModifica" method="post">
+								<input type="hidden" name="id" value="<%=c.getId()%>">
+								<button type="submit" class="btn btn-secondary btn-lg">Modifica</button>
+							</form>
+						</td>
+
+						<td>
+							<form class="col-12" action="/privato/corsi/EliminaCorsi" method="post">
+								<input type="hidden" name="id" value="<%=c.getId()%>">
+								<button type="submit" class="btn btn-secondary btn-lg">Elimina</button>
+							</form>
+						</td>
 
 					</tr>
 					<%
@@ -107,17 +109,17 @@ Vector<Corso> corsi= (Vector<Corso>) request.getAttribute("corsi");
 					%>
 				</tbody>
 			</table>
-			</form>
+			
 		</div>
 
-</header>
-		<!-- Footer-->
-		<%@ include file="/WEB-INF/footer.jsp"%>
+	</header>
+	<!-- Footer-->
+	<%@ include file="/WEB-INF/footer.jsp"%>
 
-		<!-- Bootstrap core JS-->
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-		<!-- Core theme JS-->
-		<script src="js/scripts.js"></script>
+	<!-- Bootstrap core JS-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="js/scripts.js"></script>
 </body>
 </html>

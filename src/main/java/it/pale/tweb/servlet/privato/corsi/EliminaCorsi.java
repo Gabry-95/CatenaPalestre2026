@@ -15,14 +15,14 @@ import it.pale.tweb.dao.beans.CorsoDAO;
 /**
  * Servlet implementation class Corsi
  */
-@WebServlet("/privato/corsi/Corsi")
-public class Corsi extends HttpServlet {
+@WebServlet("/privato/corsi/EliminaCorsi")
+public class EliminaCorsi extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Corsi() {
+    public EliminaCorsi() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +30,7 @@ public class Corsi extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. lettura input
 		String ids=request.getParameter("id");
 		
