@@ -20,38 +20,36 @@ import it.pale.tweb.dao.beans.Palestra;
 @WebServlet("/privato/corsi/RichiediAggiungiCorsi")
 public class RichiediAggiungiCorsi extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RichiediAggiungiCorsi() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public RichiediAggiungiCorsi() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	HttpSession session= request.getSession();
-	int id= (int) session.getAttribute("Palestra");
-	Palestra p= new Palestra();
-	p.setId(id);
-	
-	CorsoDAO corsiDAO= new CorsoDAO();
-	Vector<Corso> corsi= corsiDAO.getAll();
-	
-	int prossimoID=1;
-	if (!corsi.isEmpty()) {
-		prossimoID=corsi.lastElement().getId()+1;
-	}
-	
-	request.setAttribute("prossimoID", prossimoID);
-	
-	
-	request.getRequestDispatcher("/WEB-INF/privato/corsi/aggiungiCorsi.jsp").forward(request, response);
+		if(request.getSession().getAttribute("autenticato")==null) {
+			response.sendRedirect("/RichiediLogin?errore");
+			return ;
+		}
 
-	
+		HttpSession session= request.getSession();
+		int id= (int) session.getAttribute("Palestra");
+		Palestra p= new Palestra();
+		p.setId(id);
+
+		CorsoDAO corsiDAO= new CorsoDAO();
+		Vector<Corso> corsi= corsiDAO.getCorso(p);
+
+
+		request.getRequestDispatcher("/WEB-INF/privato/corsi/aggiungiCorsi.jsp").forward(request, response);
+
+
 	}
 
 }

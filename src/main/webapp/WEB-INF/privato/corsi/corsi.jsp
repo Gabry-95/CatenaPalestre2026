@@ -17,8 +17,7 @@ Vector<Corso> corsi= (Vector<Corso>) request.getAttribute("corsi");
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>Corsi</title>
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/logo.ico" />
+
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
@@ -37,82 +36,88 @@ Vector<Corso> corsi= (Vector<Corso>) request.getAttribute("corsi");
 
 	<!-- Navigation-->
 	<%@ include file="/WEB-INF/privato/navbarPrivato.jsp"%>
-	<!-- Masthead-->
-	<header class="masthead bg-primary text-white text-center">
-		<div class="container d-flex align-items-center flex-column">
-			<!-- Masthead Avatar Image-->
-			<img class="masthead-avatar mb-5" src="/assets/logo.png" />
-			<!--adatta la dimensione del logo, e scrivi "logo" non log  -->
-			<!-- Masthead Heading-->
-			<h1 class="masthead-heading text-uppercase mb-0">Gestisci I
-				Corsi</h1>
-			<!-- Icon Divider-->
-			<div class="divider-custom divider-light">
-				<div class="divider-custom-line"></div>
-				<div class="divider-custom-icon"></div>
-				<div class="divider-custom-line"></div>
-			</div>
-			<!-- Masthead Subheading-->
-			<p>
+
+	<div class="container d-flex align-items-center flex-column">
+
+		<!-- Masthead Heading-->
+		<h1 class="masthead-heading text-uppercase mb-0">Gestisci I Corsi</h1>
+		<!-- Icon Divider-->
+		<div class="divider-custom divider-light">
+			<div class="divider-custom-line"></div>
+			<div class="divider-custom-icon"></div>
+			<div class="divider-custom-line"></div>
 		</div>
+		<!-- Masthead Subheading-->
+		<p>
+	</div>
 
-		<div class="mb-3" style="text-align: center;">
-			<form class="col-12" action="/privato/corsi/RichiediAggiungiCorsi" method="get">
-				<input type="hidden" name="id" value="">
-				<button type="submit" class="btn btn-secondary btn-lg">Aggiungi Corso</button>
-			</form>
-		</div>
+	<div class="container text-start mb-4">
+		<form class="d-inline-block"
+			action="/privato/corsi/RichiediAggiungiCorsi" method="get">
+			<input type="hidden" name="id" value="">
+			<button type="submit" class="btn btn-secondary btn-lg">Aggiungi
+				Corso</button>
+		</form>
+	</div>
 
+	<div class="container align-items-center">
+		<table class="table table-secondary table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Nome</th>
+					<th scope="col">Costo</th>
+					<th scope="col">Tipo</th>
+					<th scope="col"></th>
+					<th scope="col"></th>
 
-		<div class="container align-items-center">
-			<table class="table table-secondary table-hover">
-				<thead>
-					<tr>
-						<th scope="col">Idss</th>
-						<th scope="col">Nome</th>
-						<th scope="col">Costo</th>
-						<th scope="col">Tipo</th>
-						 <th scope="col"></th> 
-						<th scope="col"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<%
+				</tr>
+			</thead>
+			<tbody>
+				<%
 					for (Corso c : corsi) {
 					%>
-					<tr>
-						<td><%=
+				<tr>
+					<td><%=
 							c.getId()
 							%></td>
-						<td><%= c.getNome() %></td>
-						<td><%= c.getCosto()%></td>
-						<td><%= c.getTipo()%></td>
+					<td><%= c.getNome() %></td>
+					<td><%= c.getCosto()%></td>
+					<td><%= c.getTipo()%></td>
 
 
-						<td>
-							<form class="col-12" action="/privato/corsi/RichiediModificaCorsi" method="post">
-								<input type="hidden" name="id" value="<%=c.getId()%>">
-								<button type="submit" class="btn btn-secondary btn-lg">Modifica</button>
-							</form>
-						</td>
+					<td>
+						<form class="col-12" action="/privato/corsi/RichiediModificaCorsi"
+							method="get">
+							<input type="hidden" name="id" value="<%=c.getId()%>">
+							<button type="submit" class="btn btn-secondary btn-lg">Modifica</button>
+						</form>
+					</td>
 
-						<td>
-							<form class="col-12" action="/privato/corsi/EliminaCorsi" method="post">
-								<input type="hidden" name="id" value="<%=c.getId()%>">
-								<button type="submit" class="btn btn-secondary btn-lg">Elimina</button>
-							</form>
-						</td>
+					<td>
+						<form class="col-12" action="/privato/corsi/EliminaCorsi"
+							method="post">
+							<input type="hidden" name="id" value="<%=c.getId()%>">
+							<button type="submit" class="btn btn-secondary btn-lg">Elimina</button>
+						</form>
+					</td>
 
-					</tr>
-					<%
+				</tr>
+				<%
 					}
 					%>
-				</tbody>
-			</table>
-			
-		</div>
+			</tbody>
+		</table>
+
+	</div>
 
 	</header>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<!-- Footer-->
 	<%@ include file="/WEB-INF/footer.jsp"%>
 

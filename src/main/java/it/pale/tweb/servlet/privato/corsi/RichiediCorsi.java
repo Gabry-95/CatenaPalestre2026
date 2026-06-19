@@ -33,6 +33,10 @@ public class RichiediCorsi extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (request.getSession().getAttribute("autenticato")==null) {
+			response.sendRedirect("/RichiediLogin?errore");
+			return;
+		}
 		//bisogna prendere i corsi disponibili per la palestra d'interesse dal DB
 		//stabiliamo la sessione, creiamo un oggetto palestra che riempiamo con l'attributo palestra che sta in sessione
 		HttpSession session= request.getSession();
@@ -42,10 +46,10 @@ public class RichiediCorsi extends HttpServlet {
 		//non legge nessun input, vogliamo prendere gli studenti dal DB(elaborazione)
 		//ci creiamo un oggetto corsoDAO e un vettore di corsi, tramite il metodo getALL di CorsoDAO riempiamo l'oggetto corsi
 		CorsoDAO corsoDAO= new CorsoDAO();
-		Vector<Corso> corsi= corsoDAO.getAll();
-		
+		Vector<Corso> corsi= corsoDAO.getCorso(p);
+
 		//output
-	
+
 		request.setAttribute("corsi", corsi);
 		//invoco la view
 		request.getRequestDispatcher("/WEB-INF/privato/corsi/corsi.jsp").forward(request, response);

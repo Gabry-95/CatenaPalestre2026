@@ -61,7 +61,7 @@ public class CorsoDAO {
 	}
 
 	public boolean salva(Corso corso) {
-		String query = "INSERT INTO Corso VALUES ( ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO Corso (nome, costo, tipo, palestra) VALUES ( ?, ?, ?, ?)";
 		boolean esito = false;
 
 		PreparedStatement ps;
@@ -69,11 +69,11 @@ public class CorsoDAO {
 		try {
 			ps = conn.prepareStatement(query);
 
-			ps.setInt(1, corso.getId());
-			ps.setString(2, corso.getNome());
-			ps.setInt(3, corso.getCosto());
-			ps.setString(4, corso.getTipo());
-			ps.setInt(5, corso.getPalestra());
+			
+			ps.setString(1, corso.getNome());
+			ps.setInt(2, corso.getCosto());
+			ps.setString(3, corso.getTipo());
+			ps.setInt(4, corso.getPalestra());
 
 			int tmp = ps.executeUpdate();
 			if (tmp == 1)
