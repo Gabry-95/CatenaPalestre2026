@@ -34,14 +34,14 @@ public class Abbonamento {
 		final int COSTO_PREMIUM=60;
 		final int COSTO_GOLD=90;
 		
-		final int LIMITI_INGRSSO=3;
+		final int LIMITI_INGRESSO=3;
 		
 		this.fattura = fattura;
 		this.tipo = tipo;
 	
 		//i piani di abbonamento hanno prezzi e limiti di ingrsso fissi
 		if(this.tipo.equals("Standard")) {
-			this.limiteIngressi = LIMITI_INGRSSO;
+			this.limiteIngressi = LIMITI_INGRESSO;
 			this.costo=COSTO_STANDARD+corsi;
 		}
 		else {

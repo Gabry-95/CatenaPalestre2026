@@ -14,6 +14,7 @@ import it.pale.tweb.dao.beans.Account;
 import it.pale.tweb.dao.beans.AccountDAO;
 import it.pale.tweb.dao.beans.Personale_amministrativo;
 import it.pale.tweb.dao.beans.Personale_amministrativoDAO;
+import it.pale.tweb.dao.utils.SecurityPassword;
 /**
  * Servlet implementation class Login
  */
@@ -34,42 +35,46 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		String rememberString = request.getParameter("remember");
-		boolean remember = false;
-		if(rememberString!=null) {
-			remember=true;
-		}
-		Account account = new Account();
-		account.setUsername(username);
-		account.setPassword(password);
-		AccountDAO aDAO = new AccountDAO();
-		Integer matricola=aDAO.login(account);
-		if (matricola!=null) {
-			if(remember) {
-				Cookie cookieU = new Cookie("username", username);
-				Cookie cookieP = new Cookie("password", password);
-				cookieU.setMaxAge(60*60*24);
-				cookieP.setMaxAge(60*60*24);
-				response.addCookie(cookieU);
-				response.addCookie(cookieP);
+		try {
+			String username = request.getParameter("username");
+			String password = request.getParameter("password");
+			String hashPassword=SecurityPassword.sha512(password); 
+			String rememberString = request.getParameter("remember");
+			boolean remember = false;
+			if(rememberString!=null) {
+				remember=true;
 			}
-			
-			Personale_amministrativo utente= new Personale_amministrativo();
-			utente.setMatricola(matricola);
-			Personale_amministrativoDAO pDAO= new Personale_amministrativoDAO();
-			int idPalestra=pDAO.getPalestra(utente);
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("autenticato", true);
-			session.setAttribute("Palestra", idPalestra);
-			
-			request.getRequestDispatcher("/WEB-INF/privato/index.jsp").forward(request, response);
-		}
-		else {
+			Account account = new Account();
+			account.setUsername(username);
+			account.setPassword(hashPassword);
+			AccountDAO aDAO = new AccountDAO();
+			Integer matricola=aDAO.login(account);
+			if (matricola!=null) {
+				if(remember) {
+					Cookie cookieU = new Cookie("username", username);
+					Cookie cookieP = new Cookie("password", hashPassword);
+					cookieU.setMaxAge(60*60*24);
+					cookieP.setMaxAge(60*60*24);
+					response.addCookie(cookieU);
+					response.addCookie(cookieP);
+				}
+				
+				Personale_amministrativo utente= new Personale_amministrativo();
+				utente.setMatricola(matricola);
+				Personale_amministrativoDAO pDAO= new Personale_amministrativoDAO();
+				int idPalestra=pDAO.getPalestra(utente);
+				
+				HttpSession session = request.getSession();
+				session.setAttribute("autenticato", true);
+				session.setAttribute("Palestra", idPalestra);
+				
+				request.getRequestDispatcher("/WEB-INF/privato/index.jsp").forward(request, response);
+			}
+			else {
+				response.sendRedirect("/RichiediLogin?errore");
+			}
+		}catch(Exception e) {
 			response.sendRedirect("/RichiediLogin?errore");
 		}
-		//response.sendRedirect("/Funzionalita");
 	}
 }

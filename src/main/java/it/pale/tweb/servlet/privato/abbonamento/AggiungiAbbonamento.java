@@ -91,12 +91,15 @@ public class AggiungiAbbonamento extends HttpServlet {
 			if(esitoA && esitoF && esitoS) {
 				request.setAttribute("matricola", matricola);
 				request.getRequestDispatcher("/privato/abbonamento/DettagliAbbonamento").forward(request, response);
+				return;
 			}
 			else {
 				response.sendRedirect("/privato/abbonamento/RichiediAggiungiAbbonamento?errore");
+				return;
 			}
 		}catch(Exception e) {
 			response.sendRedirect("/privato/abbonamento/RichiediAggiungiAbbonamento?errore");
+			return;
 		}
 	}
 }

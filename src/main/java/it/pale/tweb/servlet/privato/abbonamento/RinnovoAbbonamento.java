@@ -35,27 +35,25 @@ public class RinnovoAbbonamento extends HttpServlet {
 			return;
 		}
 		
-		AbbonamentoDAO aDAO= new AbbonamentoDAO();
-		Abbonamento a=new Abbonamento();
-		boolean esito=false;
-		
-		int fattura=Integer.parseInt(request.getParameter("fattura"));
-		a.setFattura(fattura);
 		try {
+			AbbonamentoDAO aDAO= new AbbonamentoDAO();
+			Abbonamento a=new Abbonamento();
+			boolean esito=false;
+			
+			int fattura=Integer.parseInt(request.getParameter("fattura"));
+			a.setFattura(fattura);
 			esito=aDAO.rinnovaAbbonamento(a);
+			if(esito) {
+				request.getRequestDispatcher("/WEB-INF/privato/abbonamento/dettagliAbbonamento.jsp").forward(request, response);
+			}
+			else {
+				response.sendRedirect("/privato/abbonamento/DettagliAbbonamento?errore");
+				return;
+			}
 		}catch(Exception e) {
-			response.sendRedirect("/WEB-INF/errore.jsp");
+			response.sendRedirect("/privato/abbonamento/DettagliAbbonamento?errore");
 			return;
 		}
-		if(esito) {
-			request.getRequestDispatcher("/WEB-INF/privato/abbonamento/dettagliAbbonamento.jsp").forward(request, response);
-		}
-		else {
-			response.sendRedirect("/WEB-INF/errore.jsp");
-			return;
-		}
-		
-		
 	}
 
 }

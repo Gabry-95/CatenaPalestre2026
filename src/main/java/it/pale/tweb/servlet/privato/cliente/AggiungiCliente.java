@@ -35,24 +35,31 @@ public class AggiungiCliente extends HttpServlet {
 			response.sendRedirect("/RichiediLogin?errore");
 			return;
 		}
-		
-		String nome=request.getParameter("nome");
-		String cognome=request.getParameter("cognome");
-		long telefono=Long.parseLong(request.getParameter("telefono"));
-		
-		Cliente c= new Cliente();
-		ClienteDAO cDAO= new ClienteDAO();
-		
-		c.setNome(nome);
-		c.setCognome(cognome);
-		c.setTelefono(telefono);
-		boolean esito= cDAO.salva(c);
-		
-		if(esito) {
-			request.getRequestDispatcher("/WEB-INF/privato/cliente/aggiungiCliente.jsp").forward(request, response);
+		try {
+			String nome=request.getParameter("nome");
+			String cognome=request.getParameter("cognome");
+			long telefono=Long.parseLong(request.getParameter("telefono"));
+			
+			Cliente c= new Cliente();
+			ClienteDAO cDAO= new ClienteDAO();
+			
+			c.setNome(nome);
+			c.setCognome(cognome);
+			c.setTelefono(telefono);
+			boolean esito= cDAO.salva(c);
+			
+			if(esito) {
+				request.getRequestDispatcher("/WEB-INF/privato/cliente/aggiungiCliente.jsp").forward(request, response);
+				return;
+			}
+			else {
+				response.sendRedirect("/privato/cliente/AggiungiCliente?errore");
+				return;
+			}
+		}catch(Exception e) {
+			response.sendRedirect("/privato/cliente/RichiediAggiungiCliente?errore");
+			return;
 		}
-		else {
-			request.getRequestDispatcher("/WEB-INF/errore1.jsp").forward(request, response);
-		}
+		
 	}
 }

@@ -20,14 +20,14 @@ public class AccountDAO {
             ps.setString(1, account.getUsername());
             ps.setString(2, account.getPassword());
             ResultSet rs = ps.executeQuery();
-            if (rs.next())
+            if (rs.next()) {
                 res = rs.getInt(1);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         DBManager.closeConnection();
         return res;
     }
-    
     
 }

@@ -63,7 +63,7 @@ public class Istruttore_salaDAO {
 	}
 
 	public boolean salva(Istruttore_sala istruttoreS) {
-		String query = "INSERT INTO Istruttore_sala VALUES ( ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO Istruttore_sala (nome, cognome, palestra, telefono) VALUES ( ?, ?, ?, ?)";
 		boolean esito = false;
 
 		PreparedStatement ps;
@@ -71,11 +71,10 @@ public class Istruttore_salaDAO {
 		try {
 			ps = conn.prepareStatement(query);
 
-			ps.setInt(1, istruttoreS.getMatricola());
-			ps.setString(2, istruttoreS.getNome());
-			ps.setString(3, istruttoreS.getCognome());
-			ps.setInt(4, istruttoreS.getPalestra());
-			ps.setLong(5, istruttoreS.getTelefono());
+			ps.setString(1, istruttoreS.getNome());
+			ps.setString(2, istruttoreS.getCognome());
+			ps.setInt(3, istruttoreS.getPalestra());
+			ps.setLong(4, istruttoreS.getTelefono());
 
 
 			int tmp = ps.executeUpdate();

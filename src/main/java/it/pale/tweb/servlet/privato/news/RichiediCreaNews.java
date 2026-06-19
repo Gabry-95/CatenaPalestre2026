@@ -9,10 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import it.pale.tweb.dao.beans.News;
-import it.pale.tweb.dao.beans.NewsDAO;
-import it.pale.tweb.dao.beans.Palestra;
-
 /**
  * Servlet implementation class RichiediCreaNews
  */
