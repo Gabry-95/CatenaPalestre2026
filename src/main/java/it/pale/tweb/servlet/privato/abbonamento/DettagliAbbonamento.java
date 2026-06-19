@@ -34,6 +34,11 @@ public class DettagliAbbonamento extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if (request.getSession().getAttribute("autenticato")==null) {
+			response.sendRedirect("/RichiediLogin?errore");
+			return;
+		}
+		
 		String m=request.getParameter("matricola");
 		
 		if(m!=null) {

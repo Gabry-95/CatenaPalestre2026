@@ -26,6 +26,11 @@ public class Funzionalita extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (request.getSession().getAttribute("autenticato")==null) {
+			response.sendRedirect("/RichiediLogin?errore");
+			return;
+		}
+		
 		request.getRequestDispatcher("/WEB-INF/privato/index.jsp").forward(request, response);
 	}
 }

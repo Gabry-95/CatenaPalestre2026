@@ -20,51 +20,51 @@ import java.util.Date;
 @WebServlet("/privato/news/CreaNews")
 public class CreaNews extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CreaNews() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public CreaNews() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	HttpSession session= request.getSession();
-	int id=(int) session.getAttribute("Palestra");
-	
-	
-	//lettura input, leggiamo solo i dati che può inserire un amministrativo nel form
-	
-	String testo=request.getParameter("testo");
-	
-	
-	//elaborazione
-	News news= new News ();
-	
-	NewsDAO newsDAO= new NewsDAO();
-	
-	//l'id è autoincrementale.
-	
-	news.setTesto(testo);
-	news.setData(new java.util.Date());
-	news.setPalestra(id);
-	boolean esito=newsDAO.salva(news);
-	
-	if(esito) {
-		response.sendRedirect("RichiediCreaNews");
-		
-	}
-	else
-	{
-		request.getRequestDispatcher("/WEB-INF/errore1.jsp").forward(request, response);
-	}
-	
-	
-	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		if (request.getSession().getAttribute("autenticato")==null) {
+			response.sendRedirect("/RichiediLogin?errore");
+			return;
+		}
+
+		int id=(int)request.getSession().getAttribute("Palestra");
+
+
+		//lettura input, leggiamo solo i dati che può inserire un amministrativo nel form
+
+		String testo=request.getParameter("testo");
+
+		//elaborazione
+		News news= new News ();
+
+		NewsDAO newsDAO= new NewsDAO();
+
+		//l'id è autoincrementale.
+
+		news.setTesto(testo);
+		news.setData(new java.util.Date());
+		news.setPalestra(id);
+		boolean esito=newsDAO.salva(news);
+
+		if(esito) {
+			response.sendRedirect("RichiediCreaNews");
+
+		}
+		else
+		{
+			request.getRequestDispatcher("/WEB-INF/errore1.jsp").forward(request, response);
+		}
+	}
 }

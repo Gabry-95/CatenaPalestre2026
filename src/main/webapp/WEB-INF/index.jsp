@@ -60,7 +60,7 @@
 						sia un atleta esperto o stia muovendo i tuoi primi passi verso uno
 						stile di vita più sano, qui troverai l'ambiente ideale per
 						brillare.</p>
-					<a class="btn btn-dark btn-xl" href="#portfolio">Scopri i
+					<a class="btn btn-dark btn-xl" href="#servizi">Scopri i
 						Nostri Servizi</a>
 				</div>
 

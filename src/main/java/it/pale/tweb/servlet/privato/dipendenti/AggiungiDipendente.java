@@ -39,7 +39,12 @@ public class AggiungiDipendente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
+		
+		if (request.getSession().getAttribute("autenticato")==null) {
+			response.sendRedirect("/RichiediLogin?errore");
+			return;
+		}
+		
 		int palestra=(int)request.getSession().getAttribute("Palestra");
 		String nome=request.getParameter("nome");
 		String cognome=request.getParameter("cognome");

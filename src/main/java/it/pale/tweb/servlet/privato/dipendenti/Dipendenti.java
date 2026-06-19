@@ -39,15 +39,17 @@ public class Dipendenti extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//lettura input
-		HttpSession session=request.getSession();
-		int id=(int) session.getAttribute("Palestra");
+		
+		if (request.getSession().getAttribute("autenticato")==null) {
+			response.sendRedirect("/RichiediLogin?errore");
+			return;
+		}
+		
+		int id=(int)request.getSession().getAttribute("Palestra");
 
 		Palestra p= new Palestra();
 		p.setId(id);
 
-
-		//elaborazione
 		Vector <Istruttore_sala> is = new  Vector <Istruttore_sala>();
 		Istruttore_salaDAO isDAO = new Istruttore_salaDAO();
 
@@ -65,7 +67,7 @@ public class Dipendenti extends HttpServlet {
 		ic=icDAO.elencoIC(p);
 		pt=ptDAO.elencoPT(p);
 		pa=paDAO.getTelefonoPA(p);
-		//output
+		
 		request.setAttribute("is", is);
 		request.setAttribute("ic", ic);
 		request.setAttribute("pt", pt);

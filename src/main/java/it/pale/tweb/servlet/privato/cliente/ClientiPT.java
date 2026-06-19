@@ -33,6 +33,11 @@ public class ClientiPT extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
+    	if (request.getSession().getAttribute("autenticato")==null) {
+			response.sendRedirect("/RichiediLogin?errore");
+			return;
+		}
+    	
     	Integer id=Integer.parseInt(request.getParameter("pt"));
     	Personal_trainer pt= new Personal_trainer();
     	pt.setMatricola(id);

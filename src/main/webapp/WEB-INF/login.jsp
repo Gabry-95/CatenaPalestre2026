@@ -30,61 +30,60 @@
 	<!-- Navigation-->
 	<%@ include file="/WEB-INF/navbar.jsp"%>
 
-	<!--Login Page  -->
-	<link rel="stylesheet"
-		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-		crossorigin="anonymous">
+	<%
+	if (request.getParameter("errore") != null) {
+	%>
+
+	<%@ include file="/WEB-INF/errore.jsp"%>
+
+	<%
+	}
+	%>
+
 
 	<section class="login bg-white">
 		<div class="login_box">
 			<div class="left">
 				<div class="top_link"></div>
 				<div class="contact">
-					<form action="Login" method="post" style="width: 100%;"> 
+					<form action="Login" method="post" style="width: 100%;">
 						<h3>Area Riservata</h3>
 
 						<div class="input-group-custom" style="position: relative;">
 							<i class="fa-solid fa-user"
 								style="position: absolute; left: 5px; top: 22px; color: #4f30677d;"></i>
-							<input type="text" name=username placeholder="USERNAME"
-								style="padding-left: 30px;">
-							<div class="invalid-feedback" data-sb-feedback="name:required">Username
-								errato.</div>
+							<input type="text" name="username" placeholder="USERNAME"
+								id="inputUsername" style="padding-left: 30px;">
 						</div>
 
 						<div class="input-group-custom" style="position: relative;">
 							<i class="fa-solid fa-lock"
 								style="position: absolute; left: 5px; top: 22px; color: #4f30677d;"></i>
 							<input type="password" name=password placeholder="PASSWORD"
-								style="padding-left: 30px;">
-							<div class="invalid-feedback" data-sb-feedback="name:required">Password
-								errata.</div>
+								id="inputPassword" style="padding-left: 30px;">
 						</div>
 
-						<button class="submit">Accedi</button>
+						<div class="checkbox mb-3">
+							<label
+								style="display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">
+								<input name="remember" type="checkbox" value="true">
+								Ricordati di Me
+							</label>
+						</div>
+
+						<button class="submit" type="submit">Accedi</button>
 					</form>
 				</div>
 			</div>
+
 			<div class="right">
-				<div class="right-text">
-					<h2></h2>
-					<h5></h5>
-				</div>
-				<div class="right-inductor">
-					
-				</div>
+				<div class="right-inductor"></div>
 			</div>
 		</div>
 	</section>
 
-
 	<!-- Footer-->
 	<%@ include file="/WEB-INF/footer.jsp"%>
-
-
-
-
 
 	<!-- Bootstrap core JS-->
 	<script
