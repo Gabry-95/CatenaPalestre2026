@@ -74,7 +74,7 @@
 		</table>
 	</div>
 	<!-- Footer-->
-	<br> <br> <br> <br> <br> <br> <br> <br> <br>
+	<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 	<%@ include file="/WEB-INF/footer.jsp"%>
 	<!-- Bootstrap core JS-->
 	<script
