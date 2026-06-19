@@ -38,33 +38,37 @@ public class CreaNews extends HttpServlet {
 			response.sendRedirect("/RichiediLogin?errore");
 			return;
 		}
+		
+		try {
+			int id=(int)request.getSession().getAttribute("Palestra");
 
-		int id=(int)request.getSession().getAttribute("Palestra");
 
+			//lettura input, leggiamo solo i dati che può inserire un amministrativo nel form
 
-		//lettura input, leggiamo solo i dati che può inserire un amministrativo nel form
+			String testo=request.getParameter("testo");
 
-		String testo=request.getParameter("testo");
+			//elaborazione
+			News news= new News ();
 
-		//elaborazione
-		News news= new News ();
+			NewsDAO newsDAO= new NewsDAO();
 
-		NewsDAO newsDAO= new NewsDAO();
+			//l'id è autoincrementale.
 
-		//l'id è autoincrementale.
+			news.setTesto(testo);
+			news.setData(new java.util.Date());
+			news.setPalestra(id);
+			boolean esito=newsDAO.salva(news);
 
-		news.setTesto(testo);
-		news.setData(new java.util.Date());
-		news.setPalestra(id);
-		boolean esito=newsDAO.salva(news);
+			if(esito) {
+				response.sendRedirect("/privato/news/RichiediCreaNews");
 
-		if(esito) {
-			response.sendRedirect("RichiediCreaNews");
-
-		}
-		else
-		{
-			request.getRequestDispatcher("/WEB-INF/errore1.jsp").forward(request, response);
+			}
+			else
+			{
+				response.sendRedirect("/privato/news/RichiediCreaNews?errore");
+			}
+		}catch(Exception e) {
+			response.sendRedirect("/privato/news/RichiediCreaNews?errore");
 		}
 	}
 }

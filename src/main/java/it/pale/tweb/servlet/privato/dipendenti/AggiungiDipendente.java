@@ -6,7 +6,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Vector;
 
 import it.pale.tweb.dao.beans.Corso;
 import it.pale.tweb.dao.beans.Istruttore_corso;
@@ -45,63 +44,68 @@ public class AggiungiDipendente extends HttpServlet {
 			return;
 		}
 		
-		int palestra=(int)request.getSession().getAttribute("Palestra");
-		String nome=request.getParameter("nome");
-		String cognome=request.getParameter("cognome");
-		long telefono=Long.parseLong(request.getParameter("telefono"));
-		int tipo=Integer.parseInt(request.getParameter("tipo"));
-		String[] checkbox = request.getParameterValues("corsi");
-		boolean esitoD=false;
-		boolean esitoI=true;
-		
-		switch(tipo) {
-		
-		case 1: 
-			Istruttore_sala is= new Istruttore_sala(0, nome, cognome, palestra, telefono);
-			Istruttore_salaDAO isDAO= new Istruttore_salaDAO();
-			esitoD=isDAO.salva(is);
-			break;
+		try {
+			int palestra=(int)request.getSession().getAttribute("Palestra");
+			String nome=request.getParameter("nome");
+			String cognome=request.getParameter("cognome");
+			long telefono=Long.parseLong(request.getParameter("telefono"));
+			int tipo=Integer.parseInt(request.getParameter("tipo"));
+			String[] checkbox = request.getParameterValues("corsi");
+			boolean esitoD=false;
+			boolean esitoI=true;
 			
-		case 2: 
-			Istruttore_corso ic= new Istruttore_corso(0, nome, cognome, palestra, telefono);
-			Istruttore_corsoDAO icDAO= new Istruttore_corsoDAO();
-			esitoD=icDAO.salva(ic);
+			switch(tipo) {
+			
+			case 1: 
+				Istruttore_sala is= new Istruttore_sala(0, nome, cognome, palestra, telefono);
+				Istruttore_salaDAO isDAO= new Istruttore_salaDAO();
+				esitoD=isDAO.salva(is);
+				break;
+				
+			case 2: 
+				Istruttore_corso ic= new Istruttore_corso(0, nome, cognome, palestra, telefono);
+				Istruttore_corsoDAO icDAO= new Istruttore_corsoDAO();
+				esitoD=icDAO.salva(ic);
 
-			if (checkbox!= null) {
+				if (checkbox!= null) {
 
-				esitoI=false;
-				InsegnaDAO iDAO= new InsegnaDAO();
+					esitoI=false;
+					InsegnaDAO iDAO= new InsegnaDAO();
 
-				for(String s: checkbox) {
-					Corso c= new Corso();
-					c.setId(Integer.parseInt(s));
-					ic=icDAO.getFromTelefono(ic);
-					System.out.println(ic.getMatricola());
-					esitoI=iDAO.salva(c, ic);
-					if(esitoI==false) {
-						break;
+					for(String s: checkbox) {
+						Corso c= new Corso();
+						c.setId(Integer.parseInt(s));
+						ic=icDAO.getFromTelefono(ic);
+						System.out.println(ic.getMatricola());
+						esitoI=iDAO.salva(c, ic);
+						if(esitoI==false) {
+							break;
+						}
 					}
 				}
+				break;
+			
+			case 3:
+				Personal_trainer pt= new Personal_trainer(0, nome, cognome, palestra, telefono);
+				Personal_trainerDAO ptDAO= new Personal_trainerDAO();
+				esitoD=ptDAO.salva(pt);
+				break;
+			
+			case 4:
+				Personale_amministrativo pa= new Personale_amministrativo(0, nome, cognome, palestra, telefono);
+				Personale_amministrativoDAO paDAO= new Personale_amministrativoDAO();
+				esitoD=paDAO.salva(pa);
+				break;
 			}
-			break;
-		
-		case 3:
-			Personal_trainer pt= new Personal_trainer(0, nome, cognome, palestra, telefono);
-			Personal_trainerDAO ptDAO= new Personal_trainerDAO();
-			esitoD=ptDAO.salva(pt);
-			break;
-		
-		case 4:
-			Personale_amministrativo pa= new Personale_amministrativo(0, nome, cognome, palestra, telefono);
-			Personale_amministrativoDAO paDAO= new Personale_amministrativoDAO();
-			esitoD=paDAO.salva(pa);
-			break;
-		}
-		if(esitoD && esitoI) {
-			request.getRequestDispatcher("/privato/dipendenti/Dipendenti").forward(request, response);
-			return;
-		}
-		else {
+			if(esitoD && esitoI) {
+				request.getRequestDispatcher("/privato/dipendenti/Dipendenti").forward(request, response);
+				return;
+			}
+			else {
+				response.sendRedirect("/privato/dipendenti/RichiediAggiungiDipendente?errore");
+				return;
+			}
+		}catch(Exception e) {
 			response.sendRedirect("/privato/dipendenti/RichiediAggiungiDipendente?errore");
 			return;
 		}

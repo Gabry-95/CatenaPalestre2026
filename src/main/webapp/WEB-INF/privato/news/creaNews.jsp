@@ -34,7 +34,17 @@
 
 	<!-- Navigation-->
 	<%@ include file="/WEB-INF/privato/navbarPrivato.jsp"%>
+	
+	<%
+	if (request.getParameter("errore") != null) {
+	%>
+		
+		<%@ include file="/WEB-INF/errore.jsp"%>
 
+	<%
+	}
+	%>
+	
 	<div class="container py-5">
 		<div class="container px-4 px-lg-5 text-center">
 			<h1 class="mb-1">Crea Una Nuova News</h1>

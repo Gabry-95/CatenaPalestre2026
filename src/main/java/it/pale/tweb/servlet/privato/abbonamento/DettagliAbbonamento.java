@@ -39,18 +39,18 @@ public class DettagliAbbonamento extends HttpServlet {
 			return;
 		}
 		
-		String m=request.getParameter("matricola");
-		
-		if(m!=null) {
+		try {
+			String m=request.getParameter("matricola");
 			
-			Cliente cliente= new Cliente();
-			CorsoDAO cDAO= new CorsoDAO();
-			Vector<Corso> corsiSeguiti= new Vector<>();
-			AbbonamentoDAO aDAO= new AbbonamentoDAO();
-			Abbonamento a= new Abbonamento();
-			boolean scadenza=false;
-			
-			try {
+			if(m!=null) {
+				
+				Cliente cliente= new Cliente();
+				CorsoDAO cDAO= new CorsoDAO();
+				Vector<Corso> corsiSeguiti= new Vector<>();
+				AbbonamentoDAO aDAO= new AbbonamentoDAO();
+				Abbonamento a= new Abbonamento();
+				boolean scadenza=false;
+				
 				Integer matricola=Integer.parseInt(m);
 				cliente.setMatricola(matricola);
 				a=aDAO.InfoAbbonamento(cliente);
@@ -58,15 +58,14 @@ public class DettagliAbbonamento extends HttpServlet {
 				if(a.getLimiteIngressi()==null) {
 					corsiSeguiti=cDAO.getCorsiSeguiti(a);
 				}
-			}catch(Exception e) {
-				response.sendRedirect("/privato/abbonamento/DettagliAbbonamento?errore");
-				return;
+				request.setAttribute("scadenza", scadenza);
+				request.setAttribute("corsiSeguiti", corsiSeguiti);
+				request.setAttribute("abbonamento", a);
 			}
-			request.setAttribute("scadenza", scadenza);
-			request.setAttribute("corsiSeguiti", corsiSeguiti);
-			request.setAttribute("abbonamento", a);
+			request.getRequestDispatcher("/WEB-INF/privato/abbonamento/dettagliAbbonamento.jsp").forward(request, response);
+		}catch(Exception e) {
+			response.sendRedirect("/privato/abbonamento/DettagliAbbonamento?errore");
+			return;
 		}
-		request.getRequestDispatcher("/WEB-INF/privato/abbonamento/dettagliAbbonamento.jsp").forward(request, response);
 	}
-
 }
