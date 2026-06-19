@@ -176,7 +176,7 @@
 					<a class="portfolio-item" href="Palestre">
 						<div class="caption">
 							<div class="caption-content">
-								<div class="h1">Cerca la palestra più vicina a te</div>
+								<div class="h1">Cerca le nostre sedi</div>
 								<p class="mb-0">Visualizza le informazioni e i servizi
 									offerti dalla sede a te più comoda</p>
 							</div>

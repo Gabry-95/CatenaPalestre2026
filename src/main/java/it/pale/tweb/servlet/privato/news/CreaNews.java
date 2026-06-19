@@ -5,14 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import it.pale.tweb.dao.beans.News;
 import it.pale.tweb.dao.beans.NewsDAO;
-import it.pale.tweb.dao.beans.Palestra;
-import it.pale.tweb.dao.utils.Utils;
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.Date;
 
 /**
  * Servlet implementation class CreaNews

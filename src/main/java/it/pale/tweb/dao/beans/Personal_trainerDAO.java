@@ -62,7 +62,7 @@ public class Personal_trainerDAO {
 	}
 
 	public boolean salva(Personal_trainer personalT) {
-		String query = "INSERT INTO Personal_trainer VALUES ( ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO Personal_trainer (nome, cognome, palestra, telefono) VALUES ( ?, ?, ?, ?)";
 		boolean esito = false;
 
 		PreparedStatement ps;
@@ -70,11 +70,10 @@ public class Personal_trainerDAO {
 		try {
 			ps = conn.prepareStatement(query);
 
-			ps.setInt(1, personalT.getMatricola());
-			ps.setString(2, personalT.getNome());
-			ps.setString(3, personalT.getCognome());
-			ps.setInt(4, personalT.getPalestra());
-			ps.setLong(5, personalT.getTelefono());
+			ps.setString(1, personalT.getNome());
+			ps.setString(2, personalT.getCognome());
+			ps.setInt(3, personalT.getPalestra());
+			ps.setLong(4, personalT.getTelefono());
 
 
 			int tmp = ps.executeUpdate();

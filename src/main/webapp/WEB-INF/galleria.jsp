@@ -39,7 +39,7 @@
 
 			<div class="gallery" align="center" style="padding: 30px">
 
-				<a href="assets/gallery/small/g1.jpg" data-lightbox="mygallery">
+				<a href="assets/gallery/big/g1.jpg" data-lightbox="mygallery">
 					<img src="assets/gallery/small/g1.jpg">
 				</a> <a href="assets/gallery/big/g2.jpg" data-lightbox="mygallery">
 					<img src="assets/gallery/small/g2.jpg">

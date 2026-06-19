@@ -7,8 +7,6 @@ import java.util.Vector;
 import java.sql.Connection;
 import it.pale.tweb.dao.utils.DBManager;
 
-import it.pale.tweb.dao.beans.Palestra;
-
 
 public class NewsDAO {
 	private static Connection conn = null;
