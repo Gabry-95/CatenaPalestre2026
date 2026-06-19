@@ -90,7 +90,7 @@ Vector<Corso> corsi= (Vector<Corso>) request.getAttribute("corsi");
 
 
 						<td>
-							<form class="col-12" action="/privato/corsi/RichiediModifica" method="post">
+							<form class="col-12" action="/privato/corsi/RichiediModificaCorsi" method="post">
 								<input type="hidden" name="id" value="<%=c.getId()%>">
 								<button type="submit" class="btn btn-secondary btn-lg">Modifica</button>
 							</form>
