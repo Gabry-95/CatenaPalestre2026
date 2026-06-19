@@ -5,7 +5,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
+
+import it.pale.tweb.dao.beans.Corso;
+import it.pale.tweb.dao.beans.CorsoDAO;
+import it.pale.tweb.dao.beans.Palestra;
 
 /**
  * Servlet implementation class RichiediModificaCorsi
@@ -13,21 +19,45 @@ import java.io.IOException;
 @WebServlet("/privato/corsi/RichiediModificaCorsi")
 public class RichiediModificaCorsi extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RichiediModificaCorsi() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public RichiediModificaCorsi() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		if(request.getSession().getAttribute("autenticato")==null) {
+			response.sendRedirect("/RichiediLogin?errore");
+			return;
+
+		}
+		HttpSession session= request.getSession();
+		int id= (int) session.getAttribute("Palestra");
+		Palestra p= new Palestra();
+		p.setId(id);
+
+		String idCorsi= request.getParameter("id");
+		int idS=-1;
+
+		idS=Integer.parseInt(idCorsi);
+
+		Corso corsi= new Corso();
+		CorsoDAO corsiDAO= new CorsoDAO();
+
+		corsi.setId(idS);
+		corsi=corsiDAO.get(corsi);
+
+		request.setAttribute("corsi", corsi);
+
+		request.getRequestDispatcher("/WEB-INF/privato/corsi/aggiungiCorsi.jsp").forward(request, response);
+
+
 	}
 
 }

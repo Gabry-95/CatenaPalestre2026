@@ -105,7 +105,7 @@
 					</a>
 				</div>
 				<div class="col-lg-6">
-					<a class="portfolio-item" href="/privato/corsi/ClientiPT">
+					<a class="portfolio-item" href="/privato/corsi/IscrittiCorsi">
 						<div class="caption">
 							<div class="caption-content">
 								<div class="h1">Visualizza Iscritti ai Corsi</div>

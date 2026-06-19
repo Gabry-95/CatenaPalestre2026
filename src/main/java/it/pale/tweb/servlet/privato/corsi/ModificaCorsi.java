@@ -14,16 +14,16 @@ import it.pale.tweb.dao.beans.CorsoDAO;
 import it.pale.tweb.dao.beans.Palestra;
 
 /**
- * Servlet implementation class AggiungiCorsi
+ * Servlet implementation class Modifica
  */
-@WebServlet("/privato/corsi/AggiungiCorsi")
-public class AggiungiCorsi extends HttpServlet {
+@WebServlet("/privato/corsi/ModificaCorsi")
+public class ModificaCorsi extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AggiungiCorsi() {
+	public ModificaCorsi() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -37,29 +37,31 @@ public class AggiungiCorsi extends HttpServlet {
 			return ;
 		}
 		HttpSession session= request.getSession();
-		int id=(int) session.getAttribute("Palestra");
+		int idPalestra= (int) session.getAttribute("Palestra");
 		Palestra p= new Palestra();
-		p.setId(id);
+		p.setId(idPalestra);
 
-
+		String idS=request.getParameter("id");
 		String nome= request.getParameter("nome");
-		String costoS=request.getParameter("costo");
-		String tipo=request.getParameter("tipo");
+		String costoS= request.getParameter("costo");
+		String tipo= request.getParameter("tipo");
 
-
-		int costo= Integer.parseInt(costoS);
+		int id=Integer.parseInt(idS);
+		int costo=Integer.parseInt(costoS);
 
 		Corso c= new Corso();
-
+		c.setId(id);
 		c.setNome(nome);
 		c.setCosto(costo);
 		c.setTipo(tipo);
-		c.setPalestra(id);
+		c.setPalestra(idPalestra);
 
-		CorsoDAO corsoDAO= new CorsoDAO();
+		CorsoDAO corsiDAO= new CorsoDAO();
 
-		corsoDAO.salva(c);
+		corsiDAO.modifica(c);
+
 		response.sendRedirect("RichiediCorsi");
+
 	}
 
 }

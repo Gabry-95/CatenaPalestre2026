@@ -29,75 +29,81 @@
 <body id="page-top">
 
 	<%
-Palestra p = (Palestra) request.getAttribute("Palestra"); //prendiamo la palestra dalla sessione
-int prossimoID = (int) request.getAttribute("prossimoID");
+	Palestra p = (Palestra) request.getAttribute("Palestra"); //prendiamo la palestra dalla sessione
+	Corso c = (Corso) request.getAttribute("corsi");
 
+	String action = "AggiungiCorsi";
+	String ID = "";
+	String nome = "";
+	String costo = "";
+	String tipo = "";
+	String testoButton = "Aggiungi";
+	String readonly = "";
 
-String action="AggiungiCorsi";  
-String ID=prossimoID+"";
-String nome="";
-String costo="";
-String tipo="";
-String testoButton="Aggiungi";
-String readonly="";
-
-/* if (studente!=null){//sono nel caso modifica quindi
-	action="Modifica"; 
-	matricola=studente.getMatricola()+"";
-	nome=studente.getNome();
-	dataN=studente.getDataDiNascita().toString();
-	testoButton="Modifica";
-	readonly="readonly";
-} */
-
-%>
+	if (c != null) {//sono nel caso modifica 
+		action = "ModificaCorsi";
+		ID = c.getId() + "";
+		nome = c.getNome() + "";
+		costo = c.getCosto() + "";
+		tipo = c.getTipo() + "";
+		testoButton = "Modifica";
+		readonly = "readonly";
+	}
+	%>
 	<!-- Navigation-->
 	<%@ include file="/WEB-INF/privato/navbarPrivato.jsp"%>
 
 	<!-- Masthead-->
-	<header class="masthead bg-primary text-white text-center">
-		<div class="container d-flex align-items-center flex-column">
+	<br>
+	<div class="container d-flex align-items-center flex-column">
 
-			<!-- Masthead Heading-->
-			<h1 class="masthead-heading text-uppercase mb-0">Aggiungi un
-				Corso</h1>
-		</div>
+		<!-- Masthead Heading-->
+		<h1 class="masthead-heading text-uppercase mb-0">Aggiungi un
+			Corso</h1>
+	</div>
+	<br>
+	<br>
 
-		<div class="container text-dark">
-			<form action="<%=action %>" method="post">
-				<div class="form-floating mb-3">
-					<input class="form-control" id="ID" name="ID" type="text"
-						placeholder="Inserisci Id" data-sb-validations="required"
-						value="<%= ID %>" readonly /> <label for="ID">Id</label>
-				</div>
+	<div class="container text-dark">
+		<form action="<%=action%>" method="post">
+			<%
+			if (c != null) {
+			%>
+			<input type="hidden" name="id" value="<%=ID%>" />
+			<%
+			}
+			%>
 
-				<div class="form-floating mb-3">
-					<input class="form-control" id="nome" name="nome" type="text"
-						placeholder="Inserisci nome" data-sb-validations="required"
-						value="<%=nome %>" /> <label for="nome">Nome</label>
-				</div>
+			<div class="form-floating mb-3">
+				<input class="form-control" id="nome" name="nome" type="text"
+					placeholder="Inserisci nome" required
+					value="<%=nome%>" /> <label for="nome">Nome</label>
+			</div>
 
-				<div class="form-floating mb-3">
-					<input class="form-control" id="costo" name="costo" type="number"
-						placeholder="Inserisci costo" data-sb-validations="required"
-						value="<%=costo %>" /> <label for="costo">Costo</label>
-						
-				</div>
+			<div class="form-floating mb-3">
+				<input class="form-control" id="costo" name="costo" type="number"
+					placeholder="Inserisci costo" required
+					value="<%=costo%>" /> <label for="costo">Costo</label>
 
-				<div class="form-floating mb-3">
-					<input class="form-control" id="tipo" name="tipo" type="text"
-						placeholder="Inserisci tipo" data-sb-validations="required"
-						value="<%=tipo %>" /> <label for="tipo">Tipo</label>
-				</div>
+			</div>
 
-				<p></p>
-				<!-- POST -->
-				<a href="RichiediCorsi"><button class="btn btn-secondary btn-xl"
-						id="submitButton" type="button">Annulla</button></a>
-				<button class="btn btn-secondary btn-xl" id="submitButton"
-					type="submit"><%= testoButton %></button>
+			<div class="form-floating mb-3">
+				<input class="form-control" id="tipo" name="tipo" type="text"
+					placeholder="Inserisci tipo" required
+					value="<%=tipo%>" /> <label for="tipo">Tipo</label>
+			</div>
+
+			<p></p>
+			<!-- POST -->
+			<a href="RichiediCorsi"><button class="btn btn-secondary btn-xl"
+					id="submitButton" type="button">Annulla</button></a>
+			<button class="btn btn-secondary btn-xl" id="submitButton"
+				type="submit"><%=testoButton%></button>
 		</form>
-		</div>
-	</header>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
 </body>
 </html>
