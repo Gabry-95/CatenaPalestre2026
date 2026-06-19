@@ -31,7 +31,10 @@ public class AggiungiCliente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//QUI NON HO NECESSITà DI SAPERE A QUALE PALESTRA APPARTIENE AMMINISTRATIVO
+		if (request.getSession().getAttribute("autenticato")==null) {
+			response.sendRedirect("/RichiediLogin?errore");
+			return;
+		}
 		
 		String nome=request.getParameter("nome");
 		String cognome=request.getParameter("cognome");

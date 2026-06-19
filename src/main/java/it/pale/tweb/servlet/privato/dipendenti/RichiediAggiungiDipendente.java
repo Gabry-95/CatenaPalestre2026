@@ -32,6 +32,11 @@ public class RichiediAggiungiDipendente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if (request.getSession().getAttribute("autenticato")==null) {
+			response.sendRedirect("/RichiediLogin?errore");
+			return;
+		}
+		
 		int id=(int)request.getSession().getAttribute("Palestra");
 		Palestra p= new Palestra();
 		p.setId(id);

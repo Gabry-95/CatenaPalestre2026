@@ -3,7 +3,7 @@
 	<!-- Navigation-->
 	<nav class="navbar navbar-expand-lg fixed-top">
 		<div class="container-fluid">
-			<a class="logo"> <img src="${pageContext.request.contextPath}/assets/img/logo.png"
+			<a class="logo"> <img src="/assets/img/logo.png"
 				class="logo-navbar">
 			</a>
 			<button class="navbar-toggler" type="button"
@@ -23,10 +23,10 @@
 				</ul>
 				<div class="d-flex align-items-center ms-auto">
 
-					<a class="admin"> <img src="${pageContext.request.contextPath}/assets/img/person.svg"
+					<a class="admin"> <img src="/assets/img/person.svg"
 						class="logo-admin">
-					</a> <a href="RichiediLogin" class="btn btn-personalizzato"
-						id="areariservata">Area riservata</a>
+					</a> <a href="Logout" class="btn btn-personalizzato"
+						id="areariservata">Logout</a>
 				</div>
 			</div>
 		</div>

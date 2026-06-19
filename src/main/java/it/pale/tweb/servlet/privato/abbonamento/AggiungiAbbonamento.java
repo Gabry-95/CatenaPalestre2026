@@ -36,6 +36,11 @@ public class AggiungiAbbonamento extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if (request.getSession().getAttribute("autenticato")==null) {
+			response.sendRedirect("/RichiediLogin?errore");
+			return;
+		}
+		
 		try {
 			int matricola=Integer.parseInt(request.getParameter("matricola"));
 			Integer matricolaPT=Integer.parseInt(request.getParameter("matricolaPT"));
