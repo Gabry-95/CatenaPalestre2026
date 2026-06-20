@@ -49,7 +49,17 @@
 
 	<!-- Navigation-->
 	<%@ include file="/WEB-INF/privato/navbarPrivato.jsp"%>
+	
+	<%
+	if (request.getParameter("errore") != null) {
+	%>
+		
+		<%@ include file="/WEB-INF/errore.jsp"%>
 
+	<%
+	}
+	%>
+	
 	<div class="container py-5">
 		<h3 class="mb-1">Istruttori Di Sala</h3>
 		<table class="table table-striped">
@@ -118,48 +128,8 @@
 			</tbody>
 		</table>
 	</div>
-
-	<div class="container py-5">
-		<h3 class="mb-1">Personal Trainer</h3>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-				<th scope="col">#</th>
-					<th scope="col">Matricola</th>
-					<th scope="col">Nome</th>
-					<th scope="col">Cognome</th>
-					<th scope="col">Palestra</th>
-					<th scope="col">Telefono</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-				k=0;
-				for (Personal_trainer t: pts) {
-					k++;
-				%>
-				<tr>
-					<td><%=k%></td>
-					<td><%=t.getMatricola()%></td>
-					<td><%=t.getNome()%></td>
-					<td><%=t.getCognome()%></td>
-					<td><%=t.getPalestra()%></td>
-					<td><%=t.getTelefono()%></td>
-					<td>
-						<form class="col-12" action="/privato/cliente/ClientiPT" method="get">
-								<input type="hidden" name="pt" value="<%=t.getMatricola()%>">
-								<button type="submit" class="btn btn-primary btn">Visualizza Utenti Seguiti</button>
-						</form>
-					</td>
-				</tr>
-				<%
-				}
-				%>
-			</tbody>
-		</table>
-	</div>
-
-	<div class="container py-5">
+	
+		<div class="container py-5">
 		<h3 class="mb-1">Personale amministrativo</h3>
 		<table class="table table-striped">
 			<thead>
@@ -192,8 +162,54 @@
 			</tbody>
 		</table>
 	</div>
-
-
+	
+	<div class="container py-5">
+		<div class="table-responsive">
+		<h3 class="mb-1">Personal Trainer</h3>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+				<th scope="col">#</th>
+					<th scope="col">Matricola</th>
+					<th scope="col">Nome</th>
+					<th scope="col">Cognome</th>
+					<th scope="col">Palestra</th>
+					<th scope="col">Telefono</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+				k=0;
+				for (Personal_trainer t: pts) {
+					k++;
+				%>
+				<tr>
+					<td><%=k%></td>
+					<td><%=t.getMatricola()%></td>
+					<td><%=t.getNome()%></td>
+					<td><%=t.getCognome()%></td>
+					<td><%=t.getPalestra()%></td>
+					<td><%=t.getTelefono()%></td>
+					<td>
+					<div class="d-flex gap-5">
+						<form action="/privato/cliente/ClientiPT" method="get">
+								<input type="hidden" name="pt" value="<%=t.getMatricola()%>">
+								<button type="submit" class="btn btn-primary btn">Visualizza Utenti Seguiti</button>
+						</form>
+						<form action="/privato/cliente/ClientiPDF" method="get">
+								<input type="hidden" name="pt" value="<%=t.getMatricola()%>">
+								<button type="submit" class="btn btn-primary btn">Scarica Lista Utenti</button>
+						</form>
+					</div>
+					</td>
+				</tr>
+				<%
+				}
+				%>
+			</tbody>
+		</table>
+		</div>
+	</div>
 
 	<!-- Footer-->
 	<%@ include file="/WEB-INF/footer.jsp"%>

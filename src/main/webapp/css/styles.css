@@ -7025,6 +7025,7 @@ textarea.form-control-lg {
 
 .d-flex {
   display: flex !important;
+  padding-left: 40px
 }
 
 .d-inline-flex {

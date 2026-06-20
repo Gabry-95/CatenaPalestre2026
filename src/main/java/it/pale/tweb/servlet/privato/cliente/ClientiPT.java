@@ -45,6 +45,7 @@ public class ClientiPT extends HttpServlet {
     	Vector<Cliente> clientiSeguiti=cDAO.elencaClientiPT(pt);
     	
     	request.setAttribute("clientiSeguiti", clientiSeguiti);
+    	request.setAttribute("pt", id);
     	request.getRequestDispatcher("/WEB-INF/privato/cliente/clientiPT.jsp").forward(request, response);
     }
 
