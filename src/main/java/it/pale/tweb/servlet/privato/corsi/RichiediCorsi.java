@@ -37,23 +37,26 @@ public class RichiediCorsi extends HttpServlet {
 			response.sendRedirect("/RichiediLogin?errore");
 			return;
 		}
-		//bisogna prendere i corsi disponibili per la palestra d'interesse dal DB
-		//stabiliamo la sessione, creiamo un oggetto palestra che riempiamo con l'attributo palestra che sta in sessione
-		HttpSession session= request.getSession();
-		int id=(int)session.getAttribute("Palestra");
-		Palestra p= new Palestra();
-		p.setId(id);
-		//non legge nessun input, vogliamo prendere gli studenti dal DB(elaborazione)
-		//ci creiamo un oggetto corsoDAO e un vettore di corsi, tramite il metodo getALL di CorsoDAO riempiamo l'oggetto corsi
-		CorsoDAO corsoDAO= new CorsoDAO();
-		Vector<Corso> corsi= corsoDAO.getCorso(p);
+		try {
+			//bisogna prendere i corsi disponibili per la palestra d'interesse dal DB
+			//stabiliamo la sessione, creiamo un oggetto palestra che riempiamo con l'attributo palestra che sta in sessione
+			HttpSession session= request.getSession();
+			int id=(int)session.getAttribute("Palestra");
+			Palestra p= new Palestra();
+			p.setId(id);
+			//non legge nessun input, vogliamo prendere gli studenti dal DB(elaborazione)
+			//ci creiamo un oggetto corsoDAO e un vettore di corsi, tramite il metodo getALL di CorsoDAO riempiamo l'oggetto corsi
+			CorsoDAO corsoDAO= new CorsoDAO();
+			Vector<Corso> corsi= corsoDAO.getCorso(p);
 
-		//output
+			//output
 
-		request.setAttribute("corsi", corsi);
-		//invoco la view
-		request.getRequestDispatcher("/WEB-INF/privato/corsi/corsi.jsp").forward(request, response);
-
+			request.setAttribute("corsi", corsi);
+			//invoco la view
+			request.getRequestDispatcher("/WEB-INF/privato/corsi/corsi.jsp").forward(request, response);
+		}catch(Exception e) {
+			response.sendRedirect("/privato/Funzionalita?errore");
+		}
 	}
 
 }

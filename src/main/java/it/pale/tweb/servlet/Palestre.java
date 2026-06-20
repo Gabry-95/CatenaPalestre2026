@@ -30,17 +30,16 @@ public class Palestre extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-		//Elaborazione
-		PalestraDAO pDAO= new PalestraDAO();
-		Vector<Palestra> palestre= pDAO.getAll();
-		
-		//output
-		request.setAttribute("palestre", palestre);
-		
-		request.getRequestDispatcher("/WEB-INF/palestre.jsp").forward(request, response);
-		
+		try {
+			PalestraDAO pDAO= new PalestraDAO();
+			Vector<Palestra> palestre= pDAO.getAll();
+			
+			request.setAttribute("palestre", palestre);
+			request.getRequestDispatcher("/WEB-INF/palestre.jsp").forward(request, response);
+			
+		}catch(Exception e) {
+			response.sendRedirect("/Index?errore#servizi");
+		}
 	}
-
 }

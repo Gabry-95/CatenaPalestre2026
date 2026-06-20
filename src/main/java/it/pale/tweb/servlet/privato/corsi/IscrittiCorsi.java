@@ -39,31 +39,33 @@ public class IscrittiCorsi extends HttpServlet {
 			response.sendRedirect("/RichiediLogin?errore");
 			return ; 
 		}
-		
-		int idPale= (int) request.getSession().getAttribute("Palestra");
-		Palestra p= new Palestra();
-		p.setId(idPale);
-		
-		Vector<Corso> corsi= new Vector<Corso>();
-		CorsoDAO corsiDAO= new CorsoDAO();
-		corsi=corsiDAO.getCorso(p);
-		
-		String idCorsiS=request.getParameter("id");
-		if(idCorsiS!=null) {
-			int idCorsi=Integer.parseInt(idCorsiS);
-		
-			Corso corsoScelto=new Corso();
-			corsoScelto.setId(idCorsi);
+		try {
+			int idPale= (int) request.getSession().getAttribute("Palestra");
+			Palestra p= new Palestra();
+			p.setId(idPale);
 			
-			Vector<Cliente> c= new Vector<Cliente>();
-			ClienteDAO cDAO= new ClienteDAO();
-			c=cDAO.IscrittiCorso(corsoScelto);
+			Vector<Corso> corsi= new Vector<Corso>();
+			CorsoDAO corsiDAO= new CorsoDAO();
+			corsi=corsiDAO.getCorso(p);
 			
-		request.setAttribute("clienti", c);
-		request.setAttribute("selected", corsoScelto);
+			String idCorsiS=request.getParameter("id");
+			if(idCorsiS!=null) {
+				int idCorsi=Integer.parseInt(idCorsiS);
+			
+				Corso corsoScelto=new Corso();
+				corsoScelto.setId(idCorsi);
+				
+				Vector<Cliente> c= new Vector<Cliente>();
+				ClienteDAO cDAO= new ClienteDAO();
+				c=cDAO.IscrittiCorso(corsoScelto);
+				
+			request.setAttribute("clienti", c);
+			request.setAttribute("selected", corsoScelto);
+			}
+			request.setAttribute("corsi", corsi);
+			request.getRequestDispatcher("/WEB-INF/privato/corsi/iscrittiCorsi.jsp").forward(request, response);
+		}catch(Exception e) {
+			response.sendRedirect("/privato/corsi/RichiediCorsi?errore");
 		}
-		request.setAttribute("corsi", corsi);
-		request.getRequestDispatcher("/WEB-INF/privato/corsi/iscrittiCorsi.jsp").forward(request, response);
 	}
-
 }

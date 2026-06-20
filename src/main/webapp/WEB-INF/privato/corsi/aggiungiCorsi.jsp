@@ -52,7 +52,17 @@
 	%>
 	<!-- Navigation-->
 	<%@ include file="/WEB-INF/privato/navbarPrivato.jsp"%>
+	
+	<%
+	if (request.getParameter("errore") != null) {
+	%>
+		
+		<%@ include file="/WEB-INF/errore.jsp"%>
 
+	<%
+	}
+	%>
+	
 	<!-- Masthead-->
 	<br>
 	<div class="container d-flex align-items-center flex-column">

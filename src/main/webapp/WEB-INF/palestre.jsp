@@ -38,8 +38,22 @@
 
 	<!-- Navigation-->
 	<%@ include file="/WEB-INF/navbar.jsp"%>
+	
+	<div class="container py-5 text-center">
+		<h1 class="mb-1">Dettagli Abbonamento</h1>
+	</div>
+	
+	<%
+	if (request.getParameter("errore") != null) {
+	%>
+		
+		<%@ include file="/WEB-INF/errore.jsp"%>
 
-	<form action="/DettagliPalestra" method="post">
+	<%
+	}
+	%>
+	
+	<form action="/DettagliPalestra" method="get">
 		<div class="custom-select-container ">
 			<div class="container py-5 text-center ">
 				<h2 class="mb-1">Visualizza Le Nostre Sedi</h2>

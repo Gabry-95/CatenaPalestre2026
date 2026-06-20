@@ -37,19 +37,6 @@ public class RichiediAggiungiCorsi extends HttpServlet {
 			response.sendRedirect("/RichiediLogin?errore");
 			return ;
 		}
-
-		HttpSession session= request.getSession();
-		int id= (int) session.getAttribute("Palestra");
-		Palestra p= new Palestra();
-		p.setId(id);
-
-		CorsoDAO corsiDAO= new CorsoDAO();
-		Vector<Corso> corsi= corsiDAO.getCorso(p);
-
-
 		request.getRequestDispatcher("/WEB-INF/privato/corsi/aggiungiCorsi.jsp").forward(request, response);
-
-
 	}
-
 }

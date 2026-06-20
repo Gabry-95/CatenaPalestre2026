@@ -43,35 +43,38 @@ public class Dipendenti extends HttpServlet {
 			response.sendRedirect("/RichiediLogin?errore");
 			return;
 		}
-		
-		int id=(int)request.getSession().getAttribute("Palestra");
+		try {
+			int id=(int)request.getSession().getAttribute("Palestra");
 
-		Palestra p= new Palestra();
-		p.setId(id);
+			Palestra p= new Palestra();
+			p.setId(id);
 
-		Vector <Istruttore_sala> is = new  Vector <Istruttore_sala>();
-		Istruttore_salaDAO isDAO = new Istruttore_salaDAO();
+			Vector <Istruttore_sala> is = new  Vector <Istruttore_sala>();
+			Istruttore_salaDAO isDAO = new Istruttore_salaDAO();
 
-		Vector<Istruttore_corso> ic= new Vector <Istruttore_corso>();
-		Istruttore_corsoDAO icDAO= new Istruttore_corsoDAO();
+			Vector<Istruttore_corso> ic= new Vector <Istruttore_corso>();
+			Istruttore_corsoDAO icDAO= new Istruttore_corsoDAO();
 
-		Vector<Personal_trainer> pt= new Vector<Personal_trainer>();
-		Personal_trainerDAO ptDAO= new Personal_trainerDAO();
+			Vector<Personal_trainer> pt= new Vector<Personal_trainer>();
+			Personal_trainerDAO ptDAO= new Personal_trainerDAO();
 
-		Vector<Personale_amministrativo> pa= new Vector<Personale_amministrativo>();
-		Personale_amministrativoDAO paDAO= new Personale_amministrativoDAO();
+			Vector<Personale_amministrativo> pa= new Vector<Personale_amministrativo>();
+			Personale_amministrativoDAO paDAO= new Personale_amministrativoDAO();
 
 
-		is=isDAO.elencoIS(p);
-		ic=icDAO.elencoIC(p);
-		pt=ptDAO.elencoPT(p);
-		pa=paDAO.elencoPA(p);
-		
-		request.setAttribute("is", is);
-		request.setAttribute("ic", ic);
-		request.setAttribute("pt", pt);
-		request.setAttribute("pa", pa);
-		request.getRequestDispatcher("/WEB-INF/privato/dipendenti/dipendenti.jsp").forward(request, response);
+			is=isDAO.elencoIS(p);
+			ic=icDAO.elencoIC(p);
+			pt=ptDAO.elencoPT(p);
+			pa=paDAO.elencoPA(p);
+			
+			request.setAttribute("is", is);
+			request.setAttribute("ic", ic);
+			request.setAttribute("pt", pt);
+			request.setAttribute("pa", pa);
+			request.getRequestDispatcher("/WEB-INF/privato/dipendenti/dipendenti.jsp").forward(request, response);
+		}catch(Exception e) {
+			response.sendRedirect("Funzionalita?errore");
+		}
 	}
 
 }

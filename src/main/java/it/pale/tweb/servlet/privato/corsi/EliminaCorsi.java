@@ -31,24 +31,30 @@ public class EliminaCorsi extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1. lettura input
-		String ids=request.getParameter("id");
+		if(request.getSession().getAttribute("autenticato")==null) {
+			response.sendRedirect("/RichiediLogin?errore");
+			return ;
+		}
 		
-		//2. elaborazione
-		int id= -1;
-		id=Integer.parseInt(ids);
-		
-		Corso corso= new Corso();
-		corso.setId(id);
-		CorsoDAO corsoDAO= new CorsoDAO();
-		corsoDAO.elimina(corso);
-		//3. gestione output: non genero output
-		
-		//4. lettura output
-		response.sendRedirect("RichiediCorsi");
-		
-
-		
+		try {
+			boolean esito=false;
+			String ids=request.getParameter("id");
+			
+			int id=Integer.parseInt(ids);
+			
+			Corso corso= new Corso();
+			corso.setId(id);
+			CorsoDAO corsoDAO= new CorsoDAO();
+			corsoDAO.elimina(corso);
+			if(esito) {
+				response.sendRedirect("RichiediCorsi");
+			}
+			else {
+				response.sendRedirect("RichiediCorsi?errore");
+			}
+		}catch(Exception e) {
+			response.sendRedirect("RichiediCorsi?errore");
+		}
 	}
 
 }

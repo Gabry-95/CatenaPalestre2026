@@ -17,7 +17,7 @@
 					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="/">HOME</a></li>
 					<li class="nav-item"><a class="nav-link" aria-current="page"
-						href="/Funzionalita">Funzionalita' Amministrazione</a></li>
+						href="/privato/Funzionalita">Funzionalita' Amministrazione</a></li>
 					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="#footer">note legali &amp; social</a></li>
 				</ul>
@@ -25,7 +25,7 @@
 
 					<a class="admin"> <img src="/assets/img/person.svg"
 						class="logo-admin">
-					</a> <a href="Logout" class="btn btn-personalizzato"
+					</a> <a href="/privato/Logout" class="btn btn-personalizzato"
 						id="areariservata">Logout</a>
 				</div>
 			</div>

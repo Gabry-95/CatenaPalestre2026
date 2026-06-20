@@ -36,7 +36,17 @@ Vector<Corso> corsi= (Vector<Corso>) request.getAttribute("corsi");
 
 	<!-- Navigation-->
 	<%@ include file="/WEB-INF/privato/navbarPrivato.jsp"%>
+	
+	<%
+	if (request.getParameter("errore") != null) {
+	%>
+		
+		<%@ include file="/WEB-INF/errore.jsp"%>
 
+	<%
+	}
+	%>
+	
 	<div class="container d-flex align-items-center flex-column">
 
 		<!-- Masthead Heading-->

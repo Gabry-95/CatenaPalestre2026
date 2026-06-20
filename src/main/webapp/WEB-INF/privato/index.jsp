@@ -31,7 +31,16 @@
 	<%@ include file="/WEB-INF/privato/navbarPrivato.jsp"%>
 	
 	<p>Palestra: <%= request.getSession().getAttribute("Palestra") %></p>
+	
+	<%
+	if (request.getParameter("errore") != null) {
+	%>
+		
+		<%@ include file="/WEB-INF/errore.jsp"%>
 
+	<%
+	}
+	%>
 	
 	<!-- Portfolio-->
 	<section class="content-section" id="portfolio">
@@ -46,7 +55,7 @@
 							<div class="caption-content">
 								<div class="h1">Aggiungi Cliente</div>
 							</div>
-						</div> <img class="img-fluid" src="assets/img/portfolio/port3.jpg" alt="..." />
+						</div> <img class="img-fluid" src="/assets/img/portfolio/port3.jpg" alt="..." />
 					</a>
 				</div>
 				<div class="col-lg-6">
@@ -55,7 +64,7 @@
 							<div class="caption-content">
 								<div class="h1">Crea Abbonamento</div>
 							</div>
-						</div> <img class="img-fluid" src="assets/img/portfolio/port6.jpg" alt="..." />
+						</div> <img class="img-fluid" src="/assets/img/portfolio/port6.jpg" alt="..." />
 					</a>
 				</div>
 				<div class="col-lg-6">
@@ -64,7 +73,7 @@
 							<div class="caption-content">
 							 <div class="h1">Visualizza Personale</div> 
 							</div>
-						</div> <img class="img-fluid" src="assets/img/portfolio/port2.jpg" alt="..." />
+						</div> <img class="img-fluid" src="/assets/img/portfolio/port2.jpg" alt="..." />
 					</a>
 				</div>
 				<div class="col-lg-6">
@@ -73,7 +82,7 @@
 							<div class="caption-content">
 								<div class="h1">Visualizza Dettagli Abbonamento</div>
 							</div>
-						</div> <img class="img-fluid" src="assets/img/portfolio/port8.jpg" alt="..." />
+						</div> <img class="img-fluid" src="/assets/img/portfolio/port8.jpg" alt="..." />
 					</a>
 				</div>
 				<div class="row gx-0">
@@ -83,7 +92,7 @@
 							<div class="caption-content">
 								<div class="h1">News</div>
 							</div>
-						</div> <img class="img-fluid" src="assets/img/portfolio/port4.jpg" alt="..." />
+						</div> <img class="img-fluid" src="/assets/img/portfolio/port4.jpg" alt="..." />
 					</a>
 				</div>
 				<div class="col-lg-6">
@@ -92,7 +101,7 @@
 							<div class="caption-content">
 								<div class="h1">Corsi</div>
 							</div>
-						</div> <img class="img-fluid" src="assets/img/portfolio/port5.jpg" alt="..." />
+						</div> <img class="img-fluid" src="/assets/img/portfolio/port5.jpg" alt="..." />
 					</a>
 				</div>
 				<div class="col-lg-6">
@@ -101,7 +110,7 @@
 							<div class="caption-content">
 								<div class="h1">Aggiungi Personale</div>
 							</div>
-						</div> <img class="img-fluid" src="assets/img/portfolio/port9.jpg" alt="..." />
+						</div> <img class="img-fluid" src="/assets/img/portfolio/port9.jpg" alt="..." />
 					</a>
 				</div>
 				<div class="col-lg-6">
@@ -110,7 +119,7 @@
 							<div class="caption-content">
 								<div class="h1">Visualizza Iscritti ai Corsi</div>
 							</div>
-						</div> <img class="img-fluid" src="assets/img/portfolio/port7.jpg" alt="..." />
+						</div> <img class="img-fluid" src="/assets/img/portfolio/port7.jpg" alt="..." />
 					</a>
 				</div>
 			</div>

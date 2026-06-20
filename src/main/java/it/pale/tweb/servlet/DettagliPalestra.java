@@ -42,59 +42,58 @@ public class DettagliPalestra extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//Lettura input 
-		String idPalestra = request.getParameter("idPalestra");
-		int id= Integer.parseInt(idPalestra);
-		
-		//Elaborazione
-		PalestraDAO pDAO= new PalestraDAO();
-		Palestra p= new Palestra();
-		CorsoDAO cDAO= new CorsoDAO();
-		Vector<Corso> corsi= new Vector<Corso>();
-		Istruttore_salaDAO isDAO= new Istruttore_salaDAO();
-		Vector<Istruttore_sala> is= new Vector<Istruttore_sala>();
-		Personal_trainerDAO ptDAO= new Personal_trainerDAO();
-		Vector<Personal_trainer> pt= new Vector<Personal_trainer>();
-		NewsDAO newsDAO= new NewsDAO();
-		Vector<News> news= new Vector<News>();
-		CorsoIstruttoreDAO ciDAO= new CorsoIstruttoreDAO();
-		Vector<CorsoIstruttore> cis= new Vector<CorsoIstruttore>();
-		
-		p.setId(id);
-		long telefono = pDAO.telefono(p);
-		p=pDAO.get(p);
-		String indirizzo=p.getVia()+", "+p.getCivico()+", "+p.getCap()+" "+p.getCitta();
-		String indirizzoEncoded = URLEncoder.encode(indirizzo, "UTF-8");
-		
-		corsi=cDAO.getCorso(p);
-		Integer [] numIscritti = new Integer[corsi.size()];
-		
-		is=isDAO.elencoIS(p);
-		pt=ptDAO.elencoPT(p);
-		news=newsDAO.getNews(p);
-		cis=ciDAO.ListaCorsoIstruttore(p);
-		
-		int k=0;	
-		for(Corso c: corsi) {
-			numIscritti[k]=cDAO.numIscritti(c);
-			k++;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			//Lettura input 
+			String idPalestra = request.getParameter("idPalestra");
+			int id= Integer.parseInt(idPalestra);
+			
+			//Elaborazione
+			PalestraDAO pDAO= new PalestraDAO();
+			Palestra p= new Palestra();
+			CorsoDAO cDAO= new CorsoDAO();
+			Vector<Corso> corsi= new Vector<Corso>();
+			Istruttore_salaDAO isDAO= new Istruttore_salaDAO();
+			Vector<Istruttore_sala> is= new Vector<Istruttore_sala>();
+			Personal_trainerDAO ptDAO= new Personal_trainerDAO();
+			Vector<Personal_trainer> pt= new Vector<Personal_trainer>();
+			NewsDAO newsDAO= new NewsDAO();
+			Vector<News> news= new Vector<News>();
+			CorsoIstruttoreDAO ciDAO= new CorsoIstruttoreDAO();
+			Vector<CorsoIstruttore> cis= new Vector<CorsoIstruttore>();
+			
+			p.setId(id);
+			long telefono = pDAO.telefono(p);
+			p=pDAO.get(p);
+			String indirizzo=p.getVia()+", "+p.getCivico()+", "+p.getCap()+" "+p.getCitta();
+			String indirizzoEncoded = URLEncoder.encode(indirizzo, "UTF-8");
+			
+			corsi=cDAO.getCorso(p);
+			Integer [] numIscritti = new Integer[corsi.size()];
+			
+			is=isDAO.elencoIS(p);
+			pt=ptDAO.elencoPT(p);
+			news=newsDAO.getNews(p);
+			cis=ciDAO.ListaCorsoIstruttore(p);
+			
+			int k=0;	
+			for(Corso c: corsi) {
+				numIscritti[k]=cDAO.numIscritti(c);
+				k++;
+			}
+			
+			//Output
+			request.setAttribute("indirizzoEncoded", indirizzoEncoded);
+			request.setAttribute("telefono", telefono);
+			request.setAttribute("corsi", corsi);
+			request.setAttribute("is", is);
+			request.setAttribute("pt", pt);
+			request.setAttribute("news", news);
+			request.setAttribute("cis", cis);
+			request.setAttribute("numIscritti", numIscritti);
+			request.getRequestDispatcher("/WEB-INF/dettagliPalestra.jsp").forward(request, response);
+		}catch(Exception e) {
+			response.sendRedirect("/Palestre?errore");
 		}
-		
-		//Output
-		request.setAttribute("indirizzoEncoded", indirizzoEncoded);
-		request.setAttribute("telefono", telefono);
-		request.setAttribute("corsi", corsi);
-		request.setAttribute("is", is);
-		request.setAttribute("pt", pt);
-		request.setAttribute("news", news);
-		request.setAttribute("cis", cis);
-		request.setAttribute("numIscritti", numIscritti);
-		
-		//view
-		request.getRequestDispatcher("/WEB-INF/dettagliPalestra.jsp").forward(request, response);
-		
 	}
-
 }
