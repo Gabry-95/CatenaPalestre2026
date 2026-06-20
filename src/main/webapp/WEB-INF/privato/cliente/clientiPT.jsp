@@ -36,6 +36,7 @@
 
 	<%
 	Vector<Cliente> clientiSeguiti= (Vector<Cliente>)request.getAttribute("clientiSeguiti");
+	
 	%>
 
 	<!-- Navigation-->
@@ -73,6 +74,7 @@
 			</tbody>
 		</table>
 	</div>
+
 	<!-- Footer-->
 	<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 	<%@ include file="/WEB-INF/footer.jsp"%>
