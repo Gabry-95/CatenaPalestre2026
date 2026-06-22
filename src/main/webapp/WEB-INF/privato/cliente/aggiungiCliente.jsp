@@ -26,7 +26,7 @@
 <link href="/css/styles.css" rel="stylesheet" />
 </head>
 <body id="page-top">
-
+	
 	<!-- Navigation-->
 	<%@ include file="/WEB-INF/privato/navbarPrivato.jsp"%>
 	
@@ -39,7 +39,18 @@
 	<%
 	}
 	%>
+	
+	<%
+	if (request.getAttribute("successo") != null) {
+	%>
+		
+		<%@ include file="/WEB-INF/privato/cliente/successoCreaCliente.jsp"%>
 
+	<%
+	}
+	%>
+	
+	
 	<div class="container py-5">
 		<div class="container px-4 px-lg-5 text-center">
 			<h1 class="mb-1">Crea Un Nuovo Cliente</h1>

@@ -65,7 +65,7 @@ public class IscrittiCorsi extends HttpServlet {
 			request.setAttribute("corsi", corsi);
 			request.getRequestDispatcher("/WEB-INF/privato/corsi/iscrittiCorsi.jsp").forward(request, response);
 		}catch(Exception e) {
-			response.sendRedirect("/privato/corsi/RichiediCorsi?errore");
+			response.sendRedirect("/privato/Funzionalita?errore");
 		}
 	}
 }

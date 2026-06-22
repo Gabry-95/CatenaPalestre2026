@@ -30,8 +30,6 @@
 	<!-- Navigation-->
 	<%@ include file="/WEB-INF/privato/navbarPrivato.jsp"%>
 	
-	<p>Palestra: <%= request.getSession().getAttribute("Palestra") %></p>
-	
 	<%
 	if (request.getParameter("errore") != null) {
 	%>

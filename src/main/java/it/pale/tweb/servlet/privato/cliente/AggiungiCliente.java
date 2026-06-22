@@ -49,6 +49,9 @@ public class AggiungiCliente extends HttpServlet {
 			boolean esito= cDAO.salva(c);
 			
 			if(esito) {
+				c=cDAO.getFromTelefono(c);
+				request.setAttribute("matricola", c.getMatricola());
+				request.setAttribute("successo", true);
 				request.getRequestDispatcher("/WEB-INF/privato/cliente/aggiungiCliente.jsp").forward(request, response);
 				return;
 			}
@@ -57,7 +60,7 @@ public class AggiungiCliente extends HttpServlet {
 				return;
 			}
 		}catch(Exception e) {
-			response.sendRedirect("/privato/cliente/RichiediAggiungiCliente?errore");
+			response.sendRedirect("/privato/cliente/AggiungiCliente?errore");
 			return;
 		}
 		
