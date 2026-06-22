@@ -46,7 +46,7 @@
 
 
 
-	<%-- <%
+	<%
 	if (request.getParameter("errore") != null) {
 	%>
 		
@@ -55,7 +55,6 @@
 	<%
 	}
 	%>
- --%>
 
 	<form action="/privato/corsi/IscrittiCorsi" method="get">
 		<div class="custom-select-container ">

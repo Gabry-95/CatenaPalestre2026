@@ -157,7 +157,7 @@ public class AbbonamentoDAO {
 
 	//Rinnova Abbonamento
 	public boolean rinnovaAbbonamento(Abbonamento abbonamento) {
-		String query = "UPDATE Abbonamento SET dataScadenza=? WHERE fattura=?";
+		String query = "UPDATE Abbonamento SET dataScadenza=?, costo=? WHERE fattura=?";
 		boolean esito = false;
 
 		PreparedStatement ps;
@@ -165,17 +165,11 @@ public class AbbonamentoDAO {
 		try {
 			
 			ps = conn.prepareStatement(query);
-			
-			//Creo data scadenza da un mese ad oggi
-			Date oggi = new Date();
-			long mil= oggi.getTime();
-			mil += 30L*24*60*60*1000;
-			Date scadenza= new Date(mil);
-			
-			//converto da util.Date a sql.Date 
-			java.sql.Date data=new java.sql.Date(scadenza.getTime());
+ 
+			java.sql.Date data=new java.sql.Date(abbonamento.getDataScadenza().getTime());
 			ps.setDate(1, data);
-			ps.setInt(2, abbonamento.getFattura());
+			ps.setInt(2, abbonamento.getCosto());
+			ps.setInt(3, abbonamento.getFattura());
 
 			int tmp = ps.executeUpdate();
 			if (tmp == 1)

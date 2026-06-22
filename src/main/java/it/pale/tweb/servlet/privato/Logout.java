@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class Logout
  */
-@WebServlet("/Logout")
+@WebServlet("/privato/Logout")
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,11 +31,12 @@ public class Logout extends HttpServlet {
 		for(Cookie cookie:cookies) {
 			if(cookie.getName().equals("username") || cookie.getName().equals("password")) {
 				cookie.setMaxAge(0);
+				cookie.setPath("/");
 				response.addCookie(cookie);
 			}
 		}
 		
 		request.getSession().invalidate();
-		request.getRequestDispatcher("/").forward(request, response);
+		response.sendRedirect("/");
 	}
 }

@@ -145,6 +145,17 @@
 
 	<!-- Servizi-->
 	<section class="content-section" id="servizi">
+	
+		<%
+		if (request.getParameter("errore") != null) {
+		%>
+
+		<%@ include file="/WEB-INF/errore.jsp"%>
+
+		<%
+		}
+		%>
+
 		<div class="container px-4 px-lg-5">
 			<div class="content-section-heading text-center">
 				<h3 class="text-secondary mb-0">Servizi</h3>
@@ -159,7 +170,8 @@
 								<p class="mb-0">Non credi a ciò che diciamo? Dai un occhiata
 									tu stesso!</p>
 							</div>
-						</div> <img class="img-fluid" src="assets/img/portfolio/port1.jpg" alt="..." />
+						</div> <img class="img-fluid" src="assets/img/portfolio/port1.jpg"
+						alt="..." />
 					</a>
 				</div>
 				<div class="col-lg-6">
@@ -169,7 +181,8 @@
 								<div class="h1">Abbonamenti</div>
 								<p class="mb-0">Visualizza i nostri piani di abbonamento</p>
 							</div>
-						</div> <img class="img-fluid" src="assets/img/portfolio/port2.jpg" alt="..." />
+						</div> <img class="img-fluid" src="assets/img/portfolio/port2.jpg"
+						alt="..." />
 					</a>
 				</div>
 				<div class="col-lg-6">
@@ -180,7 +193,8 @@
 								<p class="mb-0">Visualizza le informazioni e i servizi
 									offerti dalla sede a te più comoda</p>
 							</div>
-						</div> <img class="img-fluid" src="assets/img/portfolio/port3.jpg" alt="..." />
+						</div> <img class="img-fluid" src="assets/img/portfolio/port3.jpg"
+						alt="..." />
 					</a>
 				</div>
 				<div class="col-lg-6">
@@ -190,7 +204,8 @@
 								<div class="h1">Sponsor</div>
 								<p class="mb-0">Scopri tutte le offerte e le collaborazioni</p>
 							</div>
-						</div> <img class="img-fluid" src="assets/img/portfolio/port4.jpg" alt="..." />
+						</div> <img class="img-fluid" src="assets/img/portfolio/port4.jpg"
+						alt="..." />
 					</a>
 				</div>
 			</div>

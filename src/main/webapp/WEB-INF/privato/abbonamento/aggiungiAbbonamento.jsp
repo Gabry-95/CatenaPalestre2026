@@ -80,6 +80,7 @@
 			<div class="col-md-6" id="pt-container">
 				<label class="form-label">Personal Trainer</label> 
 				<select name="matricolaPT" class="form-select" id="pt-select">
+					<option value="" selected="selected">nessun PT</option>
 					<%
 					for(Personal_trainer pt: pts){
 					%>

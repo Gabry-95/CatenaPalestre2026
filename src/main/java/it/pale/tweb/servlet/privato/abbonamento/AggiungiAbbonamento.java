@@ -43,7 +43,7 @@ public class AggiungiAbbonamento extends HttpServlet {
 		
 		try {
 			int matricola=Integer.parseInt(request.getParameter("matricola"));
-			Integer matricolaPT=Integer.parseInt(request.getParameter("matricolaPT"));
+			String matricolaPTS=request.getParameter("matricolaPT");
 			int fattura=Integer.parseInt(request.getParameter("fattura"));
 			String tipo=request.getParameter("tipo");
 			String[] checkbox = request.getParameterValues("corsi");
@@ -54,8 +54,12 @@ public class AggiungiAbbonamento extends HttpServlet {
 			boolean esitoS=true;
 			
 			AbbonamentoDAO aDAO= new AbbonamentoDAO();
+			Abbonamento a= new Abbonamento(fattura, tipo, matricola, costiAggiuntivi);
 			
 			if (checkbox!= null) {
+				//caso premium o gold con corsi selezionati
+				
+				esitoF=false;
 				
 				CorsoDAO cDAO= new CorsoDAO();
 				FrequentaDAO fDAO= new FrequentaDAO();
@@ -66,7 +70,7 @@ public class AggiungiAbbonamento extends HttpServlet {
 					corsiSelezionati.add(c);
 				}
 				costiAggiuntivi=cDAO.costoCorsiAbbonamento(corsiSelezionati);
-				Abbonamento a= new Abbonamento(fattura, tipo, matricola, costiAggiuntivi);
+				a.setCosto(a.getCosto()+costiAggiuntivi);
 				esitoA=aDAO.salva(a);
 				for(Corso c: corsiSelezionati) {
 					esitoF=fDAO.salva(a, c);
@@ -74,7 +78,9 @@ public class AggiungiAbbonamento extends HttpServlet {
 						break;
 					}
 				}
-				if(matricolaPT!=null) {
+				if(!(matricolaPTS.isEmpty()) && esitoF) {
+					
+					Integer matricolaPT=Integer.parseInt(matricolaPTS);
 					esitoS=false;
 					SegueDAO sDAO=new SegueDAO();
 					Personal_trainer pt=new Personal_trainer();
@@ -82,9 +88,20 @@ public class AggiungiAbbonamento extends HttpServlet {
 					esitoS=sDAO.salva(a, pt);
 				}
 			}
-			else {
-				Abbonamento a= new Abbonamento(fattura, tipo, matricola, costiAggiuntivi);
+			else if(!(matricolaPTS.isEmpty())) {
 				
+				//caso gold senza corsi selezionati
+				
+				Integer matricolaPT=Integer.parseInt(matricolaPTS);
+				esitoS=false;
+				SegueDAO sDAO=new SegueDAO();
+				Personal_trainer pt=new Personal_trainer();
+				pt.setMatricola(matricolaPT);
+				esitoA=aDAO.salva(a);
+				esitoS=sDAO.salva(a, pt);
+			}
+			else {
+				//caso standard o premium senza corsi selezionati o gold senza corsi e pt selezionati
 				esitoA=aDAO.salva(a);
 			}
 			

@@ -36,30 +36,39 @@ public class AggiungiCorsi extends HttpServlet {
 			response.sendRedirect("/RichiediLogin?errore");
 			return ;
 		}
-		HttpSession session= request.getSession();
-		int id=(int) session.getAttribute("Palestra");
-		Palestra p= new Palestra();
-		p.setId(id);
+		try {
+			HttpSession session= request.getSession();
+			int id=(int) session.getAttribute("Palestra");
+			boolean esito=false;
+			Palestra p= new Palestra();
+			p.setId(id);
+			
+
+			String nome= request.getParameter("nome");
+			String costoS=request.getParameter("costo");
+			String tipo=request.getParameter("tipo");
 
 
-		String nome= request.getParameter("nome");
-		String costoS=request.getParameter("costo");
-		String tipo=request.getParameter("tipo");
+			int costo= Integer.parseInt(costoS);
 
+			Corso c= new Corso();
 
-		int costo= Integer.parseInt(costoS);
+			c.setNome(nome);
+			c.setCosto(costo);
+			c.setTipo(tipo);
+			c.setPalestra(id);
 
-		Corso c= new Corso();
+			CorsoDAO corsoDAO= new CorsoDAO();
 
-		c.setNome(nome);
-		c.setCosto(costo);
-		c.setTipo(tipo);
-		c.setPalestra(id);
-
-		CorsoDAO corsoDAO= new CorsoDAO();
-
-		corsoDAO.salva(c);
-		response.sendRedirect("RichiediCorsi");
+			esito=corsoDAO.salva(c);
+			if(esito) {
+				response.sendRedirect("RichiediCorsi");
+			}
+			else {
+				response.sendRedirect("RichiediCorsi?errore");
+			}
+		}catch(Exception e) {
+			response.sendRedirect("RichiediCorsi?errore");
+		}
 	}
-
 }

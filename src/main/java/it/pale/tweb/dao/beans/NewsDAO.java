@@ -41,9 +41,7 @@ public class NewsDAO {
 		try {
 			ps = conn.prepareStatement(query);
 
-//			ps.setInt(1, news.getId());
 			ps.setString(1, news.getTesto());
-
 			java.sql.Date data=new java.sql.Date(news.getData().getTime());
 			ps.setDate(2, data);
 			ps.setLong(3, news.getPalestra());

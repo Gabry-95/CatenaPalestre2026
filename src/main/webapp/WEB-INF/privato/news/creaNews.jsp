@@ -4,10 +4,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<%
-  
-    Palestra p = (Palestra) request.getAttribute("Palestra"); 
-%>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -31,7 +27,12 @@
 <link href="/css/styles.css" rel="stylesheet" />
 </head>
 <body id="page-top">
-
+	
+	<%
+  
+    Palestra p = (Palestra) request.getAttribute("Palestra"); 
+	%>
+	
 	<!-- Navigation-->
 	<%@ include file="/WEB-INF/privato/navbarPrivato.jsp"%>
 	

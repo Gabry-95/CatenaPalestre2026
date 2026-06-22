@@ -36,32 +36,34 @@ public class ModificaCorsi extends HttpServlet {
 			response.sendRedirect("/RichiediLogin?errore");
 			return ;
 		}
-		HttpSession session= request.getSession();
-		int idPalestra= (int) session.getAttribute("Palestra");
-		Palestra p= new Palestra();
-		p.setId(idPalestra);
+		try {
+			HttpSession session= request.getSession();
+			int idPalestra= (int) session.getAttribute("Palestra");
+			Palestra p= new Palestra();
+			p.setId(idPalestra);
 
-		String idS=request.getParameter("id");
-		String nome= request.getParameter("nome");
-		String costoS= request.getParameter("costo");
-		String tipo= request.getParameter("tipo");
+			String idS=request.getParameter("id");
+			String nome= request.getParameter("nome");
+			String costoS= request.getParameter("costo");
+			String tipo= request.getParameter("tipo");
 
-		int id=Integer.parseInt(idS);
-		int costo=Integer.parseInt(costoS);
+			int id=Integer.parseInt(idS);
+			int costo=Integer.parseInt(costoS);
 
-		Corso c= new Corso();
-		c.setId(id);
-		c.setNome(nome);
-		c.setCosto(costo);
-		c.setTipo(tipo);
-		c.setPalestra(idPalestra);
+			Corso c= new Corso();
+			c.setId(id);
+			c.setNome(nome);
+			c.setCosto(costo);
+			c.setTipo(tipo);
+			c.setPalestra(idPalestra);
 
-		CorsoDAO corsiDAO= new CorsoDAO();
+			CorsoDAO corsiDAO= new CorsoDAO();
 
-		corsiDAO.modifica(c);
+			corsiDAO.modifica(c);
 
-		response.sendRedirect("RichiediCorsi");
-
+			response.sendRedirect("RichiediCorsi");
+		}catch(Exception e) {
+			response.sendRedirect("RichiediCorsi?errore");
+		}
 	}
-
 }

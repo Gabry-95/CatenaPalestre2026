@@ -189,5 +189,23 @@ public class ClienteDAO {
 		return res;
 	}
 	
-	
+	public Cliente getFromTelefono(Cliente c) {
+		String query = "SELECT * FROM Cliente WHERE telefono=?";
+
+		Cliente res = null;
+		PreparedStatement ps;
+		conn = DBManager.startConnection();
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setLong(1, c.getTelefono());
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				res = recordToCliente(rs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		DBManager.closeConnection();
+		return res;
+	}
 }
