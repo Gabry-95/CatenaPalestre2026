@@ -104,8 +104,8 @@
 				%>
 				<tr>
 					<td><%=k+1%></td>
-					<td><%=c.getTipo()%></td>
 					<td><%=c.getNome()%></td>
+					<td><%=c.getTipo()%></td>
 					<td><%=c.getCosto()%> €</td>
 					<td><%=c.getId()%></td>
 					<td><%=numIscritti[k]%></td>

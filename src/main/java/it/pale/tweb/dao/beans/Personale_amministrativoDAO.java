@@ -133,7 +133,6 @@ public class Personale_amministrativoDAO {
 		return esito;
 	}
 	
-	//Data Un utente personale amministrativo restituirne palestra
 		public int getPalestra(Personale_amministrativo pa) {
 			String query = "SELECT palestra FROM Personale_amministrativo WHERE matricola=?";
 
@@ -155,11 +154,9 @@ public class Personale_amministrativoDAO {
 			return res;
 		}
 	
-	//69. Data una palestra restituire tutti i numeri di telefono dei dipendenti con nome e cognome 
 		public Vector<Personale_amministrativo> elencoPA(Palestra p) {
-			//telefono, nome, cognome
-			String query = "SELECT * FROM Personale_amministrativo WHERE palestra=? ORDER BY matricola";
 
+			String query = "SELECT * FROM Personale_amministrativo WHERE palestra=? ORDER BY matricola";
 
 			Vector<Personale_amministrativo>res = new Vector<Personale_amministrativo>();
 			PreparedStatement ps;

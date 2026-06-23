@@ -110,7 +110,6 @@ public class PalestraDAO {
 		return esito;
 	}
 	
-	//
 	public boolean modifica(Palestra palestra) {
 		String query = "UPDATE Palestra SET telefono=?, cap=?, via=?, citta=?, civico=? WHERE id=?";
 		boolean esito = false;
@@ -136,27 +135,4 @@ public class PalestraDAO {
 		DBManager.closeConnection();
 		return esito;
 	}
-	
-	// Data Una palstra restituirne numero telefono
-	public long telefono(Palestra palestra) {
-		String query = "SELECT telefono FROM Palestra WHERE id=?";
-
-		long res = 0;
-		
-		PreparedStatement ps;
-		conn = DBManager.startConnection();
-		try {
-			ps = conn.prepareStatement(query);
-			ps.setInt(1, palestra.getId());
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				res = rs.getLong(1);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		DBManager.closeConnection();
-		return res;
-	}
-
 }

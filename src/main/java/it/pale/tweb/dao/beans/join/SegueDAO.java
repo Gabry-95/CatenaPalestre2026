@@ -69,12 +69,8 @@ public class SegueDAO {
 		try {
 			ps = conn.prepareStatement(query);
 			
-			//nuovi
 			ps.setLong(1, newA.getFattura());
 			ps.setInt(2, newPT.getMatricola());
-			
-			
-			//vecchi
 			ps.setLong(3, oldA.getFattura());
 
 			int tmp = ps.executeUpdate();

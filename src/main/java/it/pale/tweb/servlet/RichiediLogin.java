@@ -35,35 +35,41 @@ public class RichiediLogin extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Cookie[] cookies = request.getCookies();
-
-		if(cookies!=null) {
-			AccountDAO aDAO = new AccountDAO();
-			Account a = new Account();
-			
-			for(Cookie cookie : cookies) {
-				if(cookie.getName().equals("username")) {
-					a.setUsername(cookie.getValue());
+		
+		if (request.getSession().getAttribute("autenticato")==null) {
+			if(cookies!=null) {
+				AccountDAO aDAO = new AccountDAO();
+				Account a = new Account();
+				
+				for(Cookie cookie : cookies) {
+					if(cookie.getName().equals("username")) {
+						a.setUsername(cookie.getValue());
+					}
+					if(cookie.getName().equals("password")) {
+						a.setPassword(cookie.getValue());
+					}
 				}
-				if(cookie.getName().equals("password")) {
-					a.setPassword(cookie.getValue());
+				Integer matricola = aDAO.login(a);
+				if (matricola!=null) {
+					
+					Personale_amministrativo utente= new Personale_amministrativo();
+					utente.setMatricola(matricola);
+					Personale_amministrativoDAO pDAO= new Personale_amministrativoDAO();
+					int idPalestra=pDAO.getPalestra(utente);
+					
+					HttpSession session = request.getSession();
+					session.setAttribute("autenticato", true);
+					session.setAttribute("Palestra", idPalestra);
+					
+					request.getRequestDispatcher("/WEB-INF/privato/index.jsp").forward(request, response);
+					return;
 				}
 			}
-			Integer matricola = aDAO.login(a);
-			if (matricola!=null) {
-				
-				Personale_amministrativo utente= new Personale_amministrativo();
-				utente.setMatricola(matricola);
-				Personale_amministrativoDAO pDAO= new Personale_amministrativoDAO();
-				int idPalestra=pDAO.getPalestra(utente);
-				
-				HttpSession session = request.getSession();
-				session.setAttribute("autenticato", true);
-				session.setAttribute("Palestra", idPalestra);
-				
-				request.getRequestDispatcher("/WEB-INF/privato/index.jsp").forward(request, response);
-				return;
-			}
+			request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 		}
-		request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+		else {
+			request.getRequestDispatcher("/WEB-INF/privato/index.jsp").forward(request, response);
+		}
+		
 	}
 }

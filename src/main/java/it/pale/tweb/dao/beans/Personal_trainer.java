@@ -69,8 +69,4 @@ public class Personal_trainer {
 		return "Personal_trainer [matricola=" + matricola + ", nome=" + nome + ", cognome=" + cognome + ", palestra="
 				+ palestra + ", telefono=" + telefono + "]";
 	}
-
-
-
-
 }

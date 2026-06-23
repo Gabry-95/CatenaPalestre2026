@@ -7,7 +7,6 @@ import java.security.NoSuchAlgorithmException;
 public class SecurityPassword {
 	
 	public static String sha512(String password) throws NoSuchAlgorithmException{
-			//128 caratteri
 		
 	        MessageDigest mDigest = MessageDigest.getInstance("SHA-512");
 	        byte[] result = mDigest.digest(password.getBytes(StandardCharsets.UTF_8));

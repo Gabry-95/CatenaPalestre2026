@@ -45,10 +45,7 @@ public class TestPalestra {
 //		//METODO ELIMINA
 //		if(paDAO.elimina(pa));
 //		System.out.println("L'Palestra " + pa + " è stato eliminato" );
-		
-	//DATA UNA PALESTRA RESTITUIRE IL NUMERO DI TELEFONO
-		
-		System.out.println("Telefono: "+paDAO.telefono(pa));
+	
 		
 	}
 }

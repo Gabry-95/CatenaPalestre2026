@@ -61,47 +61,52 @@ public class AggiungiAbbonamento extends HttpServlet {
 				
 				esitoF=false;
 				
-				CorsoDAO cDAO= new CorsoDAO();
-				FrequentaDAO fDAO= new FrequentaDAO();
-				
-				for(String s: checkbox) {
-					Corso c= new Corso();
-					c.setId(Integer.parseInt(s));
-					corsiSelezionati.add(c);
-				}
-				costiAggiuntivi=cDAO.costoCorsiAbbonamento(corsiSelezionati);
-				a.setCosto(a.getCosto()+costiAggiuntivi);
-				esitoA=aDAO.salva(a);
-				for(Corso c: corsiSelezionati) {
-					esitoF=fDAO.salva(a, c);
-					if(esitoF!=true) {
-						break;
-					}
-				}
-				if(!(matricolaPTS.isEmpty()) && esitoF) {
+				if(a.getTipo().equalsIgnoreCase("Premium") || a.getTipo().equalsIgnoreCase("Gold")) {
 					
-					Integer matricolaPT=Integer.parseInt(matricolaPTS);
-					esitoS=false;
-					SegueDAO sDAO=new SegueDAO();
-					Personal_trainer pt=new Personal_trainer();
-					pt.setMatricola(matricolaPT);
-					esitoS=sDAO.salva(a, pt);
+					CorsoDAO cDAO= new CorsoDAO();
+					FrequentaDAO fDAO= new FrequentaDAO();
+					
+					for(String s: checkbox) {
+						Corso c= new Corso();
+						c.setId(Integer.parseInt(s));
+						corsiSelezionati.add(c);
+					}
+					costiAggiuntivi=cDAO.costoCorsiAbbonamento(corsiSelezionati);
+					a.setCosto(a.getCosto()+costiAggiuntivi);
+					esitoA=aDAO.salva(a);
+					for(Corso c: corsiSelezionati) {
+						esitoF=fDAO.salva(a, c);
+						if(esitoF!=true) {
+							break;
+						}
+					}
+					if(!(matricolaPTS.isEmpty()) && esitoF) {
+						
+						Integer matricolaPT=Integer.parseInt(matricolaPTS);
+						esitoS=false;
+						SegueDAO sDAO=new SegueDAO();
+						Personal_trainer pt=new Personal_trainer();
+						pt.setMatricola(matricolaPT);
+						esitoS=sDAO.salva(a, pt);
+					}
 				}
 			}
 			else if(!(matricolaPTS.isEmpty())) {
 				
 				//caso gold senza corsi selezionati
-				
-				Integer matricolaPT=Integer.parseInt(matricolaPTS);
 				esitoS=false;
-				SegueDAO sDAO=new SegueDAO();
-				Personal_trainer pt=new Personal_trainer();
-				pt.setMatricola(matricolaPT);
-				esitoA=aDAO.salva(a);
-				esitoS=sDAO.salva(a, pt);
+				if(a.getTipo().equalsIgnoreCase("Gold")) {
+					Integer matricolaPT=Integer.parseInt(matricolaPTS);
+					SegueDAO sDAO=new SegueDAO();
+					Personal_trainer pt=new Personal_trainer();
+					pt.setMatricola(matricolaPT);
+					esitoA=aDAO.salva(a);
+					esitoS=sDAO.salva(a, pt);
+				}
 			}
-			else {
+			else if(a.getTipo().equalsIgnoreCase("Premium") || a.getTipo().equalsIgnoreCase("Gold") || a.getTipo().equalsIgnoreCase("Standard")){
 				//caso standard o premium senza corsi selezionati o gold senza corsi e pt selezionati
+				
 				esitoA=aDAO.salva(a);
 			}
 			

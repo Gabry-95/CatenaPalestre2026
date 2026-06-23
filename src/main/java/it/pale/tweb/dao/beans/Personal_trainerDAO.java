@@ -134,9 +134,7 @@ public class Personal_trainerDAO {
 		return esito;
 	}
 
-	//Elenca personal trainer di una palestra ordinandoli per matricola
 	public Vector<Personal_trainer> elencoPT(Palestra p) {
-		//cognome, nome
 		String query = "SELECT * FROM personal_trainer "
 				+ "WHERE palestra = ? "
 				+ "ORDER BY matricola";

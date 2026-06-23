@@ -39,7 +39,6 @@ public class ClienteDAO {
 		try {
 			ps = conn.prepareStatement(query);
 
-			//ps.setInt(1, cliente.getMatricola());
 			ps.setString(1, cliente.getNome());
 			ps.setString(2, cliente.getCognome());
 			ps.setLong(3, cliente.getTelefono());
@@ -60,8 +59,6 @@ public class ClienteDAO {
 		cliente.setNome(rs.getString("nome"));
 		cliente.setCognome(rs.getString("cognome"));
 		cliente.setTelefono(rs.getLong("telefono"));
-
-
 		return cliente;
 	}
 
@@ -131,9 +128,8 @@ public class ClienteDAO {
 		return esito;
 	}
 
-	//33. Elenca clienti seguiti dallo stesso personal trainer
 	public Vector<Cliente> elencaClientiPT(Personal_trainer pt) {
-		//cliente.Nome, cliente.cognome
+		
 		String query ="SELECT cliente.matricola, cliente.Nome, cliente.cognome, cliente.telefono FROM personal_trainer "
 				+ "JOIN segue ON segue.PersonalTrainer = personal_trainer.Matricola "
 				+ "JOIN abbonamento ON abbonamento.Fattura = segue.Abbonamento "
@@ -158,13 +154,8 @@ public class ClienteDAO {
 		return res;
 	}
 	
-	//24 Dato un corso restituire la lista di nome cognome e numero di telefono dei clienti che lo seguono 
 	public Vector<Cliente> IscrittiCorso(Corso c){
-		
-		//cliente.nome, cliente.cognome, cliente.telefono
-		
-		//Distinct perchè magari un cliente ha effettuato upgrade da gold a premium oppure ha saltato un mese di premium o gold 
-		
+	
 		String query="SELECT DISTINCT cliente.matricola, cliente.nome, cliente.cognome, cliente.telefono FROM cliente "
 				+ "JOIN abbonamento ON abbonamento.cliente = cliente.Matricola "
 				+ "JOIN frequenta ON frequenta.Abbonamento = abbonamento.Fattura "

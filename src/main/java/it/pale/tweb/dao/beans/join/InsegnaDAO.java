@@ -10,7 +10,7 @@ import it.pale.tweb.dao.utils.DBManager;
 
 public class InsegnaDAO {
 	private static Connection conn = null;
-//Assegna un istruttore corso a un corso
+
 	public boolean salva(Corso c, Istruttore_corso ic) {
 		String query = "INSERT INTO insegna VALUES ( ?, ?)";
 		boolean esito = false;
@@ -66,11 +66,8 @@ public class InsegnaDAO {
 		try {
 			ps = conn.prepareStatement(query);
 			
-			//nuovi
 			ps.setInt(1, newC.getId());
 			ps.setLong(2, newIC.getMatricola());
-			
-			//vecchi
 			ps.setInt(3, oldC.getId());
 			ps.setLong(4, oldIC.getMatricola());
 

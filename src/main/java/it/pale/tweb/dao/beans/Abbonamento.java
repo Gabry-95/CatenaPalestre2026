@@ -39,22 +39,20 @@ public class Abbonamento {
 		this.fattura = fattura;
 		this.tipo = tipo;
 	
-		//i piani di abbonamento hanno prezzi e limiti di ingrsso fissi
-		if(this.tipo.equals("Standard")) {
+		if(this.tipo.equalsIgnoreCase("Standard")) {
 			this.limiteIngressi = LIMITI_INGRESSO;
 			this.costo=COSTO_STANDARD+costoCorsi;
 		}
 		else {
 			this.limiteIngressi = null;
-			if(this.tipo.equals("Premium")) {
+			if(this.tipo.equalsIgnoreCase("Premium")) {
 				this.costo=COSTO_PREMIUM+costoCorsi;
 			}
-			else if(this.tipo.equals("Gold")){
+			else if(this.tipo.equalsIgnoreCase("Gold")){
 				this.costo=COSTO_GOLD+costoCorsi;
 			}
 		}
 		
-		//CREAZIONE DATA SCADENZA: creiamo data di oggi e aggiungiamo 30 giorni da oggi 
 		Date oggi = new Date();
 		long mil= oggi.getTime();
 		mil += 30L*24*60*60*1000;

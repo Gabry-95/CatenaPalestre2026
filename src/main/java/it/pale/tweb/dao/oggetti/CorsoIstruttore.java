@@ -10,7 +10,6 @@ public class CorsoIstruttore {
 	
 	public CorsoIstruttore() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public CorsoIstruttore(Istruttore_corso ic, Corso c) {

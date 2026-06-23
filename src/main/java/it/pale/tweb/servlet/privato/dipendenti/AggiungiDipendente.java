@@ -76,7 +76,6 @@ public class AggiungiDipendente extends HttpServlet {
 						Corso c= new Corso();
 						c.setId(Integer.parseInt(s));
 						ic=icDAO.getFromTelefono(ic);
-						System.out.println(ic.getMatricola());
 						esitoI=iDAO.salva(c, ic);
 						if(esitoI==false) {
 							break;

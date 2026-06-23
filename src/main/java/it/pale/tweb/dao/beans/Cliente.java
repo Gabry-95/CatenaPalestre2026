@@ -4,7 +4,7 @@ public class Cliente {
 	private int matricola;
 	private String nome;
 	private String cognome;
-	private long telefono;// siccome ha 13 cifre 9+prefisso
+	private long telefono;
 
 	public Cliente() {
 		this.matricola=0;
