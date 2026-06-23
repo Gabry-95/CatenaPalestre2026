@@ -1,13 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>navbar</title>
-</head>
-<body>
-
 	<!-- Navigation-->
 	<nav class="navbar navbar-expand-lg fixed-top">
 		<div class="container-fluid">
@@ -42,4 +34,3 @@
 		</div>
 	</nav>
 </body>
-</html>

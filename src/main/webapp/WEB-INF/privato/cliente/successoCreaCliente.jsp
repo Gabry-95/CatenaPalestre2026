@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Cliente Creato Correttamente</title>
-</head>
 <body>
 	
 	<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -15,7 +10,7 @@
  		</symbol>
 	</svg>
 
-	<section class=" d-flex justify-content-center">
+	<section class=" d-flex justify-content-center mt-5">
 		<div class="alert alert-success d-flex align-items-center"
 			role="alert">
 			<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
@@ -25,4 +20,3 @@
 	</section>
 
 </body>
-</html>

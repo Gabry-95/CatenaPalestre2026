@@ -17,7 +17,7 @@ Vector<Corso> corsi= (Vector<Corso>) request.getAttribute("corsi");
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>Corsi</title>
-
+<link rel="icon" type="image/x-icon" href="/assets/img/logo.ico" />
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
@@ -120,8 +120,6 @@ Vector<Corso> corsi= (Vector<Corso>) request.getAttribute("corsi");
 		</table>
 
 	</div>
-
-	</header>
 
 	<br>
 	<br>

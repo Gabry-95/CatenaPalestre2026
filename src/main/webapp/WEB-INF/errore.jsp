@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Errore</title>
-</head>
 <body>
 	<svg>
 		<symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
@@ -14,7 +9,7 @@
   		</symbol>
 	</svg>
 
-	<section class=" d-flex justify-content-center">
+	<section class=" d-flex justify-content-center mt-5">
 		<div class="alert alert-danger d-flex align-items-center" role="alert">
 			<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"
 				aria-label="Danger:">
@@ -24,4 +19,3 @@
 		</div>
 	</section>
 </body>
-</html>

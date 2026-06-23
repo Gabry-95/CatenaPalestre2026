@@ -56,11 +56,11 @@ public class AggiungiCliente extends HttpServlet {
 				return;
 			}
 			else {
-				response.sendRedirect("/privato/cliente/AggiungiCliente?errore");
+				response.sendRedirect("/privato/cliente/RichiediAggiungiCliente?errore");
 				return;
 			}
 		}catch(Exception e) {
-			response.sendRedirect("/privato/cliente/AggiungiCliente?errore");
+			response.sendRedirect("/privato/cliente/RichiediAggiungiCliente?errore");
 			return;
 		}
 		

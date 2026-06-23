@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 <title>Aurora Fitness</title>
 <!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/logo.ico" />
+<link rel="icon" type="image/png" href="assets/img/logo.png" />
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>

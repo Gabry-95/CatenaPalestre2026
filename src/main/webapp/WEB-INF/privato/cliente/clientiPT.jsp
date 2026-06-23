@@ -16,7 +16,7 @@
 <meta name="author" content="" />
 <title>Lista Clienti Seguiti</title>
 <!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/logo.ico" />
+<link rel="icon" type="image/x-icon" href="/assets/img/logo.ico" />
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
@@ -41,7 +41,7 @@
 
 	<!-- Navigation-->
 	<%@ include file="/WEB-INF/privato/navbarPrivato.jsp"%>
-
+	
 	<div class="container py-5">
 		<h3 class="mb-1">Lista Clienti</h3>
 		<table class="table table-striped">
@@ -68,7 +68,6 @@
 					<td><%=c.getTelefono()%></td>
 				</tr>
 				<%
-					k++;
 				}
 				%>
 			</tbody>
@@ -76,7 +75,6 @@
 	</div>
 
 	<!-- Footer-->
-	<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 	<%@ include file="/WEB-INF/footer.jsp"%>
 	<!-- Bootstrap core JS-->
 	<script

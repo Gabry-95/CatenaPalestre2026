@@ -92,7 +92,10 @@
 }
 
 body {
-  margin: 0;
+ margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
@@ -7025,7 +7028,8 @@ textarea.form-control-lg {
 
 .d-flex {
   display: flex !important;
-  padding-left: 40px
+  padding-left: 40px;
+ 
 }
 
 .d-inline-flex {
@@ -10973,6 +10977,7 @@ html {
 }
 
 footer.footer {
+  margin-top: auto;
   padding-top: 50px;
   padding-bottom: 5rem;
 }
@@ -10993,8 +10998,10 @@ footer.footer .social-link:hover {
 }
 
 .map {
+  min-height: 70vh;
   height: 30rem;
 }
+
 .map iframe {
   pointer-events: none;
   height: 100%;
@@ -11004,11 +11011,12 @@ footer.footer .social-link:hover {
 
 @media (max-width: 992px) {
   .map {
-    height: 75%;
+    min-height: 70vh;
+  height: 30rem;
   }
 }
 .masthead {
-  min-height: 30rem;
+ min-height: 100vh;
   position: relative;
   display: table;
   width: 100%;
@@ -11099,7 +11107,9 @@ footer.footer .social-link:hover {
   }
 }
 
-/*================================================================ AGGIUNTI =====================================================================*/
+
+
+
 .service-icon {
 	background-color: #fff;
 	color: #1D809F;
@@ -11124,7 +11134,7 @@ footer.footer .social-link:hover {
 #carosello-1 {
 	width: 400px;
 	height: auto;
-	border-radius: 6px; /* opzionale: angoli arrotondati */
+	border-radius: 6px; 
 	margin-left: 300px;
 	margin-right: 50px;
 	padding: 0;
@@ -11136,24 +11146,21 @@ footer.footer .social-link:hover {
 
 #carosello-2 .carousel-item img {
 	height: 600px;
-	/* Cambia questo valore in base a quanto lo vuoi alto (es. 400px, 60vh, ecc.) */
 	object-fit: cover;
-	/* Fondamentale: impedisce che le immagini si deformino */
 }
 
 .custom-slide-content {
 	position: absolute;
-	top: 50%; /* Centra verticalmente */
-	left: 10%; /* Posiziona a sinistra con un po' di margine */
-	transform: translateY(-50%); /* Bilancia il centraggio verticale */
-	width: 80%; /* Occupa l'80% della larghezza */
+	top: 50%; 
+	left: 10%; 
+	transform: translateY(-50%); 
+	width: 80%; 
 	max-width: 800px;
-	/* Imposta una larghezza massima per evitare testi troppo lunghi su schermi grandi */
 	color: white;
-	text-align: left; /* Allinea il testo a sinistra */
+	text-align: left;
 }
 
-/* gestione navbar*/
+
 .service-icon {
 	background-color: #fff;
 	color: #1D809F;
@@ -11165,21 +11172,17 @@ footer.footer .social-link:hover {
 	box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
-/* 1. REGOLA PER LO SFONDO E LO SPAZIO DELLA NAVBAR */
+
 .navbar {
-	background-color: #F8F8FF; /* Imposta lo sfondo all'ottanio del sito.*/
+	background-color: #F8F8FF; 
 	padding-top: 3px;
-	/* Aggiunge 10 pixel di spazio vuoto all'interno del bordo superiore della barra */
 	padding-bottom: 3px;
-	/* Aggiunge 10 pixel di spazio vuoto all'interno del bordo inferiore della barra */
 	padding-left: 20px;
-	/* Aggiunge 20 pixel di spazio vuoto interni sul lato sinistro per staccare i contenuti */
 	padding-right: 10px;
-	/* Aggiunge 20 pixel di spazio vuoto interni sul lato destro per staccare i contenuti */
 	height: 60px;
 }
 
-/* Seleziona direttamente il tag HTML <body> che esiste nella pagina. evitando che la navbar si compenetri*/
+
 body {
 	padding-top: 60px;
 }
@@ -11192,7 +11195,7 @@ body {
 	align-items: center;
 }
 
-/* 2. REGOLA PER RIDIMENSIONARE E ALLINEARE IL LOGO */
+
 .logo-navbar {
 	display: flex;
 	align-items: center;
@@ -11201,32 +11204,25 @@ body {
 	padding-right: 50px;
 }
 
-/* 3. REGOLA PER LO STILE DI BASE DEI LINK  */
+
 .navbar-nav .nav-link, #areariservata {
 	color: #000000;
-	/* Colora il testo dei link di bianco per farlo risaltare sopra lo sfondo ottanio */
 	font-family: 'Source Sans Pro', sans-serif;
-	/* Cambia il tipo di carattere applicando il font moderno 'Montserrat' */
-	font-size: 20px; /* Imposta l'altezza del testo dei link a 16 pixel */
+	font-size: 20px; 
 	font-weight: bold;
-	/* Regola lo spessore del testo su una via di mezzo (semi-bold) per farlo leggere bene */
 	text-transform: uppercase;
-	/* Forza il browser a trasformare tutte le lettere dei link in MAIUSCOLO */
 	transition: color 0.3s ease;
-	/* Crea un'animazione fluida di 0.3 secondi quando il colore del testo cambia */
 	padding-right: 20px;
 }
 
-/* 4. EFFETTO HOVER: COSA SUCCEDE QUANDO PASSI IL MOUSE SOPRA I LINK */
+
 .navbar-nav .nav-link:hover, #areariservata:hover {
 	color: #eebf20 !important;
-	/* Cambia il colore del testo in giallo #eebf20 quando l'utente ci passa sopra il mouse */
 }
 
-/* 5. EFFETTO ACTIVE: COSA SUCCEDE AL LINK DELLA PAGINA IN CUI TI TROVI */
+
 .navbar-nav .nav-link.active {
 	color: #eebf20 !important;
-	/* Mantiene il testo colorato di giallo fisso per indicare visivamente la pagina corrente */
 }
 
 .col-lg-6, .mb-1, .mb-5, .btn.btn-primary.btn-xl, lead.mb-5, btn.btn-dark.btn-xl
@@ -11236,15 +11232,11 @@ body {
 
 .admin {
 	width: 30px;
-	/* Forza la larghezza a 30 pixel, ignorando i blocchi di Bootstrap */
 	max-width: 30px !important;
-	/* Impedisce all'immagine di superare i 30px in ogni caso */
 	height: auto !important;
-	/* Mantiene le proporzioni corrette dell'icona vettoriale */
 	display: inline-block;
 	margin-right: 12px !important;
-	/* Forza 12 pixel di spazio tra l'omino e la scritta "Area riservata" */
-	display: flex; /* Allinea perfettamente l'omino in verticale */
+	display: flex; 
 	align-items: center;
 }
 
@@ -11252,11 +11244,10 @@ body {
 	display: flex;
 	align-items: center;
 	width: auto;
-	/* Blocca la larghezza del logo a 35 pixel, tenendolo piccolo e proporzionato */
 	height: 30px;
 }
 
-/* PRICING CARDS*/
+
 .pricing-card {
 	transition: all 0.3s ease;
 	
@@ -11267,7 +11258,6 @@ body {
 
 .pricing-card:hover {
 	transform: translateY(-10px);
-	 /* Cambiato in giallo acceso con opacità 0.7 per creare l'effetto lampadina */
     box-shadow: 0 0 35px rgba(238, 191, 32, 0.7) ; 
 
 	
@@ -11297,7 +11287,7 @@ body {
 	box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
 }
 
-/*Per il login  */
+
 .login {
 	height: 1000px;
 	width: 100%;
@@ -11339,9 +11329,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	height: calc(100% - 40px);
-	/* Sfrutta meglio l'altezza saltando il top_link */
 	width: 80%;
-	/* Allarghiamo leggermente l'area per far respirare i campi */
 	margin: auto;
 }
 
@@ -11373,78 +11361,62 @@ body {
 	display: block;
 	margin: auto;
 	margin-top: 50px;
-	/* 🌟 NUOVO COLORE DI SFONDO  */
 	background: #1a80aa;
 	color: #fff;
 	font-weight: bold;
-	/* 🌟 OMBRA AGGIORNATA: Sostituito il viola con il nuovo colore convertito in RGB (238, 191, 32) */
-	/* Un tocco di classe: rende il passaggio del mouse fluido */
 	transition: all 0.3s ease;
 }
 
-/* 🌟 LA PARTE DESTRA CON IL NUOVO GRADIENTE GIALLO-CIANO LEGGERO */
 .login_box .right {
 	width: 59%;
 	height: 100%;
-	/* GRADIENTE CALIBRATO: 
-       Parte dal ciano del tuo bottone ma molto trasparente (0.45) nell'angolo in alto, 
-       per poi tuffarsi subito nel tuo giallo acceso del brand che si spalma su tutto il resto della foto */
 	background: linear-gradient(212.38deg, rgba(26, 128, 170, 0.58) 0%,
-		/* 🌟 AUMENTATO: l'opacità del ciano passa da 0.45 a 0.58 */
     rgba(238, 191, 32, 0.18) 45%,
-		/* Spostato e alleggerito il giallo centrale per dare spazio al ciano */
-		
-		
-		
-		
-    rgba(238, 191, 32, 0.55) 100%
-		/* Rimane il fondo giallo acceso alla base */    
-), url('../assets/img/pesi_gialli.jpg');
+     rgba(238, 191, 32, 0.55) 100%), url('../assets/img/pesi_gialli.jpg');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
 	color: #fff;
 	position: relative;
-	/* Flexbox mantiene tutto perfettamente centrato a schermo */
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	padding: 40px;
 }
 
-/* ICONA DEL RETURN HOME */
+
 .top_link img {
 	width: 28px;
 	padding-right: 7px;
 	margin-top: -3px;
 }
 
-/* Effetto focus sui campi di testo */
+
 .left input:focus {
-	outline: none; /* Toglie la linea nera brutta di default */
+	outline: none; 
 	border-bottom: 2px solid #1a80aa;
-	/* La linea diventa dell'azzurro del bottone */
-	color: #1a80aa; /* Il testo digitato si colora leggermente */
-	transition: all 0.3s ease; /* Rende il cambio di colore fluido */
+
+	color: #1a80aa; 
+	transition: all 0.3s ease; 
 }
 
-/* SPONSOR */
 
 
-/* 2. COME: Obbliga l'immagine a rispettare i confini */
+
+
 .sponsor-img-container img {
-    max-height: 100%;    /* Dice alla foto: "Non puoi essere più alta del tuo recinto (80px)" */
-    max-width: 100%;     /* Dice alla foto: "Non puoi allargarti oltre la larghezza della card" */
-    width: auto;         /* Mantiene intatte le proporzioni originali in larghezza */
-    height: auto;        /* Mantiene intatte le proporzioni originali in altezza */
-    object-fit: contain; /* 🌟 IL SEGRETO: Scala la foto armoniosamente senza mai distorcerla o tirarla */
+    max-height: 100%;   
+    max-width: 100%;     
+    width: auto;        
+    height: auto;       
+    object-fit: contain;
 }
 
 a.sponsor-card, 
 a.sponsor-card:hover, 
 a.sponsor-card:focus {
-    text-decoration: none !important; /* Toglie la sottolineatura blu ovunque */
-    color: inherit !important;        /* Impedisce ai testi di diventare blu */
+    text-decoration: none !important;
+    color: inherit !important;        
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -11458,7 +11430,7 @@ a.sponsor-card:focus {
    
 }
 
-/* Disattiva la sottolineatura su qualsiasi elemento interno (trucco anti-bug per l'esame) */
+
 a.sponsor-card * {
     text-decoration: none !important;
 }
@@ -11466,23 +11438,19 @@ a.sponsor-card * {
     color: #6c757d !important;
     font-size: 14px;
     line-height: 1.6;
-    
-    /* 🌟 IL TRUCCO: Forza il paragrafo ad occupare sempre lo stesso spazio verticale */
-    min-height: 120px; 
-    
+    min-height: 120px;  
     margin-bottom: 15px;
 }
-/* 2. 🌟 EFFETTO HOVER CON ALONE GIALLO */
+
 a.sponsor-card:hover {
     transform: translateY(-8px);   
-    /* Cambiato in giallo acceso con opacità 0.7 per creare l'effetto lampadina */
     box-shadow: 0 0 35px rgba(238, 191, 32, 0.7) !important; 
 }
 
-/* 3. IL CONTENITORE DEL LOGO (Altezza fissa direttamente qui) */
+
 .sponsor-img-container {
     width: 100%;
-    height: 80px; /* Definiamo qui gli 80px di spazio per il logo */
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11498,7 +11466,6 @@ a.sponsor-card:hover {
     object-fit: contain; 
 }
 
-/* 4. STRUTTURAZIONE DEI TESTI (Assegnati direttamente ai tag corretti) */
 .sponsor-card h4 {
     color: #212529 !important;
     font-size: 22px;
@@ -11510,35 +11477,37 @@ a.sponsor-card:hover {
     color: #6c757d !important;
     font-size: 14.5px;
     line-height: 1.6;
-    min-height: 145px;    /* 🌟 AGGIUNGI QUESTO: costringe la descrizione a occupare lo stesso spazio in tutte le card */
-    margin-bottom: 25px;  /* Spazio tra il testo e il badge azzurro */
+    min-height: 145px;    
+    margin-bottom: 25px; 
 }
 
 .sponsor-card .coupon-area {
     color: #212529 !important;
     font-size: 15px;
-    min-height: 65px;     /* 🌟 AGGIUNGI QUESTO: allinea i testi dei coupon (es. quello lungo di Under Armour) */
+    min-height: 65px;    
     margin-top: 10px;
 }
 
 .sponsor-card .sponsor-link-footer {
-    color: #1a80aa !important; /* Azzurro del brand per l'azione in fondo */
+    color: #1a80aa !important; 
     font-weight: 600;
     font-size: 13.5px;
-    margin-top: auto; /* Spinge il link sempre sul fondo della card */
+    margin-top: auto; 
     padding-top: 15px;
 }
 
 
-/* menu' a tendina ricerca palestre */
+
 .custom-select-container {
-	margin-top: 60px;
-    margin-bottom: 60px;
-    margin-left: 400px;
-    margin-right: 60px;
+    margin-top: 60px;
+    margin-bottom: 40px; 
+    margin-left: auto;   
+    margin-right: auto; 
     display: flex;
     flex-direction: column;
-    width: 800px;
+    width: 100%;        
+    max-width: 600px;   
+    text-align: center;
 }
 
 .custom-label {
@@ -11556,15 +11525,13 @@ a.sponsor-card:hover {
     border-radius: 16px;
     outline: none;
     cursor: pointer;
-
     background: linear-gradient(145deg, #ffffff, #f1f3f5);
     color: #333;
-
-    box-shadow:
+     box-shadow:
         0 4px 10px rgba(0,0,0,0.08),
         inset 0 1px 1px rgba(255,255,255,0.8);
-
-    transition: all 0.25s ease;
+    transition: all 0.25s ease; 
+    width: 100%; 
 }
 
 .custom-select:hover {
@@ -11580,16 +11547,16 @@ a.sponsor-card:hover {
         0 6px 14px rgba(0,0,0,0.12);
 }
 
-/* bottone */
+
 #dettagli{
 	margin-bottom: 115px;
 }
 
 .masthead-avatar.mb-5{
 	
-	width: 160px;       /* 1. Forziamo il logo a una larghezza ben visibile */
-    height: auto;        /* 2. Mantiene le proporzioni corrette in automatico */
-    margin-top: 40px;    /* 3. Gli diamo un po' di aria rispetto alla navbar */
+	width: 160px;       
+    height: auto;      
+    margin-top: 40px;   
     margin-bottom: 15px;
 }
 .masthead {

@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	function aggiornaPT(){
 		const isGold = selectTipo.value === "Gold";
 		if (!ptContainer || !ptSelect){
-			//esce se non presenti container o select
 			return;
 		}
 		if(isGold){

@@ -10,7 +10,7 @@
 <meta name="author" content="" />
 <title>Area Riservata</title>
 <!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/logo.ico" />
+<link rel="icon" type="image/x-icon" href="assets/img/logo.ico" />
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
@@ -40,8 +40,8 @@
 	}
 	%>
 
-
-	<section class="login bg-white">
+	<main>
+		<section class="login bg-white">
 		<div class="login_box">
 			<div class="left">
 				<div class="top_link"></div>
@@ -81,6 +81,9 @@
 			</div>
 		</div>
 	</section>
+	</main>
+	
+	
 
 	<!-- Footer-->
 	<%@ include file="/WEB-INF/footer.jsp"%>
