@@ -70,11 +70,8 @@ public class FrequentaDAO {
 		try {
 			ps = conn.prepareStatement(query);
 			
-			//nuovi
 			ps.setInt(1, newC.getId());
 			ps.setLong(2, newA.getFattura());
-			
-			//vecchi
 			ps.setInt(3, oldC.getId());
 			ps.setLong(4, oldA.getFattura());
 

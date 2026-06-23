@@ -32,7 +32,6 @@ public class NewsDAO {
 	}
 
 	public boolean salva(News news) {
-		//siccome l'id è autoincrementale:
 		String query = "INSERT INTO News (testo, data, palestra) VALUES (?, ?, ?) ";
 		boolean esito = false;
 

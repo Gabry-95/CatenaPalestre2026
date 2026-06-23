@@ -39,10 +39,6 @@
 	<!-- Navigation-->
 	<%@ include file="/WEB-INF/navbar.jsp"%>
 	
-	<div class="container py-5 text-center">
-		<h1 class="mb-1">Dettagli Abbonamento</h1>
-	</div>
-	
 	<%
 	if (request.getParameter("errore") != null) {
 	%>

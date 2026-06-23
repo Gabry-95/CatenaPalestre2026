@@ -36,18 +36,10 @@ public class CreaNews extends HttpServlet {
 		
 		try {
 			int id=(int)request.getSession().getAttribute("Palestra");
-
-
-			//lettura input, leggiamo solo i dati che può inserire un amministrativo nel form
-
 			String testo=request.getParameter("testo");
 
-			//elaborazione
 			News news= new News ();
-
 			NewsDAO newsDAO= new NewsDAO();
-
-			//l'id è autoincrementale.
 
 			news.setTesto(testo);
 			news.setData(new java.util.Date());

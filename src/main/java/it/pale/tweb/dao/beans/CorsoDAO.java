@@ -133,8 +133,7 @@ public class CorsoDAO {
 		DBManager.closeConnection();
 		return esito;
 	}
-
-	// 68. Data una palestra, restituire l’elenco dei corsi 
+ 
 	public Vector<Corso> getCorso(Palestra palestra) {
 		String query = "SELECT * FROM Corso WHERE Palestra=? order by id";
 
@@ -156,7 +155,6 @@ public class CorsoDAO {
 		return res;
 	}
 
-	//59 Dato un corso restituire il numero di iscritti
 	public int numIscritti(Corso c) {
 
 		String query="SELECT count(DISTINCT Cliente) as 'iscritti' FROM frequenta "
@@ -183,7 +181,6 @@ public class CorsoDAO {
 	}
 
 	public int costoCorsiAbbonamento(Vector<Corso> lista) {
-		//metto tanti punti interrogativi quanti sono gli elementi della lista
 		int totale=0;
 		String id= new String();
 		
@@ -201,13 +198,10 @@ public class CorsoDAO {
 		
 		try {
 			ps = conn.prepareStatement(query);
-			//Associamo ad ogi punto interrogativo il relativo id
-
 			for(int i=0; i<lista.size(); i++) {
 				ps.setInt(i+1, lista.get(i).getId());
 
 			}
-			
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
 				totale= rs.getInt("totale");
@@ -221,7 +215,6 @@ public class CorsoDAO {
 
 	}
 	
-	//Dato un abbonamento restituisci la lista dei corsi seguiti
 	public Vector<Corso> getCorsiSeguiti(Abbonamento a) {
 		String query = "SELECT c.ID AS \"id\", c.Nome AS \"nome\", c.Costo AS \"costo\", c.Tipo AS \"tipo\", c.Palestra AS \"palestra\" FROM corso AS c "
 				+ "JOIN frequenta ON frequenta.Corso = c.ID "

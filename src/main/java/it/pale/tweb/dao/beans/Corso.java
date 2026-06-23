@@ -11,7 +11,6 @@ public class Corso {
 	public Corso() {
 		this.id=0;
 		this.nome=null;
-		
 		this.costo=0;
 		this.tipo=null;
 		this.palestra=0;
@@ -21,7 +20,6 @@ public class Corso {
 
 		this.id = id;
 		this.nome = nome;
-		
 		this.costo = costo;
 		this.tipo = tipo;
 		this.palestra = palestra;
@@ -42,8 +40,6 @@ public class Corso {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	
 
 	public int getCosto() {
 		return costo;
@@ -74,10 +70,6 @@ public class Corso {
 		return "Corso [id=" + id + ", nome=" + nome + ", costo=" + costo + ", tipo=" + tipo + ", palestra=" + palestra
 				+ "]";
 	}
-
-	
-
-
 }
 
 

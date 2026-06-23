@@ -38,9 +38,6 @@ public class Istruttore_corsoDAO {
 		istruttoreC.setCognome(rs.getString("cognome"));
 		istruttoreC.setPalestra(rs.getInt("palestra"));
 		istruttoreC.setTelefono(rs.getLong("telefono"));
-		
-
-
 		return istruttoreC;
 	}
 
@@ -137,7 +134,6 @@ public class Istruttore_corsoDAO {
 		return esito;
 	}
 	
-	//69 Data una palestra restituire tutti i numeri di telefono dei dipendenti con nome e cognome
 	public Vector<Istruttore_corso> elencoIC(Palestra p) {
 		String query = "SELECT * FROM Istruttore_corso WHERE palestra=? ORDER BY matricola ";
 

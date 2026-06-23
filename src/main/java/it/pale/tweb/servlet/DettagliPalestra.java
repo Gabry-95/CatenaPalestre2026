@@ -43,12 +43,10 @@ public class DettagliPalestra extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			//Lettura input 
+		try { 
 			String idPalestra = request.getParameter("idPalestra");
 			int id= Integer.parseInt(idPalestra);
 			
-			//Elaborazione
 			PalestraDAO pDAO= new PalestraDAO();
 			Palestra p= new Palestra();
 			CorsoDAO cDAO= new CorsoDAO();
@@ -63,8 +61,8 @@ public class DettagliPalestra extends HttpServlet {
 			Vector<CorsoIstruttore> cis= new Vector<CorsoIstruttore>();
 			
 			p.setId(id);
-			long telefono = pDAO.telefono(p);
 			p=pDAO.get(p);
+			long telefono=p.getTelefono();
 			String indirizzo=p.getVia()+", "+p.getCivico()+", "+p.getCap()+" "+p.getCitta();
 			String indirizzoEncoded = URLEncoder.encode(indirizzo, "UTF-8");
 			
@@ -82,7 +80,6 @@ public class DettagliPalestra extends HttpServlet {
 				k++;
 			}
 			
-			//Output
 			request.setAttribute("indirizzoEncoded", indirizzoEncoded);
 			request.setAttribute("telefono", telefono);
 			request.setAttribute("corsi", corsi);

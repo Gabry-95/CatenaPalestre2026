@@ -16,7 +16,6 @@ public class Istruttore_sala {
 	}
 
 	public Istruttore_sala(int matricola, String nome, String cognome, int palestra, long telefono) {
-
 		this.matricola = matricola;
 		this.nome = nome;
 		this.cognome = cognome;

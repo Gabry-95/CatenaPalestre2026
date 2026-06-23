@@ -37,8 +37,6 @@ public class Istruttore_salaDAO {
 		istruttoreS.setCognome(rs.getString("cognome"));
 		istruttoreS.setPalestra(rs.getInt("palestra"));
 		istruttoreS.setTelefono(rs.getLong("telefono"));
-
-
 		return istruttoreS;
 	}
 
@@ -135,7 +133,6 @@ public class Istruttore_salaDAO {
 		return esito;
 	}
 	
-	//Elenca istruttori di sala di una palestra ordinandoli per cognome
 	public Vector<Istruttore_sala> elencoIS(Palestra p) {
 		String query = "SELECT * FROM istruttore_sala "
 				+ " WHERE palestra = ? "
@@ -159,28 +156,4 @@ public class Istruttore_salaDAO {
 		DBManager.closeConnection();
 		return res;
 	}
-	
-	//69 Data una palestra restituire tutti i numeri di telefono dei dipendenti con nome e cognome
-//	public Vector<Istruttore_sala> getTelefonoIS(Palestra p) {
-//		String query = "SELECT * FROM Istruttore_sala WHERE palestra=?";
-//
-//		Vector<Istruttore_sala> res = new Vector<Istruttore_sala>();
-//		PreparedStatement ps;
-//		conn = DBManager.startConnection();
-//		try {
-//			ps = conn.prepareStatement(query);
-//			
-//			ps.setInt(1, p.getId());
-//			ResultSet rs = ps.executeQuery();
-//			while (rs.next()) {
-//				Istruttore_sala i= recordToIstruttoreS(rs);
-//				res.add(i);
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		DBManager.closeConnection();
-//		return res;
-//	}
-
 }

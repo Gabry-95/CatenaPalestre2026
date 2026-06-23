@@ -30,7 +30,6 @@ public class CorsoIstruttoreDAO {
 		istruttoreC.setPalestra(rs.getInt("palestra_istruttore"));
 		istruttoreC.setTelefono(rs.getLong("telefono"));
 		
-		//costruttore parametrizzato
 		CorsoIstruttore corsoIstruttore = new CorsoIstruttore(istruttoreC, corso);
 
 		return corsoIstruttore;

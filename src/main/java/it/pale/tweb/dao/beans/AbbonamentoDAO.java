@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.Vector;
 
 import it.pale.tweb.dao.utils.DBManager;
@@ -39,8 +38,6 @@ public class AbbonamentoDAO {
 		abbonamento.setDataScadenza(rs.getDate("dataScadenza"));
 		abbonamento.setLimiteIngressi(rs.getInt("limiteIngressi"));
 		if(rs.wasNull()) {
-			
-			//controllo su limiti ingressi null
 			abbonamento.setLimiteIngressi(null);
 		}
 		abbonamento.setCosto(rs.getInt("costo"));
@@ -80,11 +77,9 @@ public class AbbonamentoDAO {
 			ps.setInt(1, abbonamento.getFattura());
 			ps.setString(2, abbonamento.getTipo());
 			
-			//converto da util.Date a sql.Date 
 			java.sql.Date data=new java.sql.Date(abbonamento.getDataScadenza().getTime());
 			ps.setDate(3, data);
 
-			//Gestione null integer
 			if (abbonamento.getLimiteIngressi() != null)
 				ps.setInt(4, abbonamento.getLimiteIngressi());
 			else
@@ -134,7 +129,6 @@ public class AbbonamentoDAO {
 			ps = conn.prepareStatement(query);
 
 			ps.setString(1, abbonamento.getTipo());
-			//converto da util.Date a sql.Date 
 			ps.setDate(2, new java.sql.Date(abbonamento.getDataScadenza().getTime()));
 			if (abbonamento.getTipo().equals("standard"))
 				ps.setInt(3, abbonamento.getLimiteIngressi());
@@ -155,7 +149,6 @@ public class AbbonamentoDAO {
 		return esito;
 	}
 
-	//Rinnova Abbonamento
 	public boolean rinnovaAbbonamento(Abbonamento abbonamento) {
 		String query = "UPDATE Abbonamento SET dataScadenza=?, costo=? WHERE fattura=?";
 		boolean esito = false;
@@ -181,7 +174,6 @@ public class AbbonamentoDAO {
 		return esito;
 	}
 	
-	//dato una matricola di un cliente elenca fattura, tipo, data e limite di ingressi
 	public Abbonamento InfoAbbonamento(Cliente c) {
 		
 		String query = "SELECT * FROM Abbonamento "
@@ -206,7 +198,6 @@ public class AbbonamentoDAO {
 		return res;
 	}
 	
-	//Stabilisci se un abbonamento è scaduto
 	public boolean AbbonamentoScaduto(Abbonamento abbonamento) {
 		String query="SELECT * FROM Abbonamento "
 				+ "WHERE abbonamento.Fattura=? AND DATE(abbonamento.DataScadenza) < DATE(NOW()); ";
